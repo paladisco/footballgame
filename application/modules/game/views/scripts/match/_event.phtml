@@ -1,0 +1,22 @@
+<?php $e = $this->event; ?>
+<div class="row"<?php echo $this->display; ?>>
+    <?php
+    switch($e['side']){
+        case '1':
+            $class = "alert alert-info col-lg-6 left";
+            break;
+        case '2':
+            $class =  "alert alert-info col-lg-6 col-lg-offset-6 right";
+            break;
+        default:
+            $class = "info alert alert-info col-lg-6 col-lg-offset-3 middle";
+            break;
+    }
+    ?>
+    <div class="<?php echo $class; ?>">
+        <div class="minute"><?php echo $e['minute']; ?>'</div>
+<!--        --><?php //if($e['team_pic']){ ?><!--<div class="team element"><img src="--><?php //echo $e['team_pic']; ?><!--" /></div>--><?php //} ?>
+        <?php if($e['player_pic']){ ?><div class="player element"><img class="thumbnail" src="<?php echo $e['player_pic']; ?>" /></div><?php } ?>
+        <div class="message element <?php echo $e['class']; ?>"><?php echo $e['message']; ?></div>
+    </div>
+</div>

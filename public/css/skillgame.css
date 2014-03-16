@@ -1,0 +1,40 @@
+#skillgame .background{
+    background-image: url(images/penalty.jpg);
+    width: 450px;
+    height: 430px;
+    position: relative;
+}
+#skillgame .ball{
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    z-index: 90;
+}
+#skillgame .player{
+    position: absolute;
+    z-index: 100;
+}
+#skillgame .ball img{
+    position: absolute;
+}
+#skillgame .goal{
+    width: 350px;
+    height: 140px;
+    position: absolute;
+    top: 150px;
+    left: 50%;
+    margin-left: -175px;
+}
+#skillgame .goal .target{
+    width: 33%;
+    height: 50%;
+    float: left;
+    position: relative;
+    cursor: pointer;
+}
+#skillgame .goal .target:hover{
+    background-color: rgba(50,150,50,0.5);
+}
+#skillgame .goal .target .keeper{
+    text-align: center;
+}

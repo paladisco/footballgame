@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configdata>
+	<de>
+        <home>
+            <label><![CDATA[<i class="icon-circle"></i> Zentrale]]></label>
+            <module>game</module>
+            <controller>index</controller>
+            <action>dashboard</action>
+        </home>
+        <team>
+            <label><![CDATA[<i class="icon-male"></i> Team]]></label>
+            <module>game</module>
+            <controller>team</controller>
+            <pages>
+                <setup>
+                    <label><![CDATA[<i class="icon-facebook-sign"></i> Add Players]]></label>
+                    <module>game</module>
+                    <controller>team</controller>
+                    <action>index</action>
+                </setup>
+            </pages>
+        </team>
+        <challenge>
+            <label><![CDATA[<i class="icon-gamepad"></i> Challenge]]></label>
+            <module>game</module>
+            <controller>index</controller>
+            <action>ranking</action>
+        </challenge>
+	</de>
+</configdata>

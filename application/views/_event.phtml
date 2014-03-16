@@ -1,0 +1,38 @@
+<div class="row"<?php echo $this->display; ?>>
+    <?php
+    switch($this->event['rating']){
+        case 'good':
+            $class = "alert alert-success";
+            break;
+        case 'bad':
+            $class =  "alert alert-danger";
+            break;
+        default:
+            $class = "alert alert-info";
+            break;
+    }
+    $before = json_decode($this->event['before'],true);
+    $after = json_decode($this->event['after'],true);
+    ?>
+    <div class="col-lg-12 <?php echo $class; ?>">
+        <div class="datetime"><?php echo date("d.m.Y - G:i",$this->event['timestamp']); ?></div>
+        <?php if($this->event['pic']!=''){ ?><div class="element"><img class="thumbnail" src="<?php echo $this->event['pic']; ?>" /></div><?php } ?>
+        <div class="message element"><?php echo $this->event['logtext']; ?></div>
+        <?php foreach($after['stats'] as $type => $stats){
+            foreach($stats as $id => $stat){
+                if($stat['points']!=$before['stats'][$type][$id]['points']){ ?>
+                    <div>
+                        <i class="icon-<?php echo strtolower($stat['name']); ?>"></i>
+                        <label><?php echo $stat['name']; ?></label>
+                        <div class="progress">
+                            <div data-percentage="<?php echo $stat['points'] ?>"
+                                 class="progress-bar progress-bar-<?php if($stat['points']<30){echo "danger";}elseif($stat['points']<70){echo "warning";}else{echo "success";} ?>"
+                                 style="width: <?php echo $before['stats'][$type][$id]['points']; ?>%;"></div>
+                        </div>
+                    </div>
+                <?php }
+            }
+        }
+        ?>
+    </div>
+</div>

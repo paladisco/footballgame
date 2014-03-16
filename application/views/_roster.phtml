@@ -1,0 +1,42 @@
+<div id="roster" class="clearfix">
+    <?php foreach($this->players as $p){ ?>
+        <div class="clearfix player<?php if($p['injured']){ ?> injured<?php } ?>" data-id="<?php echo $p['id']; ?>"
+            data-html="true" data-content='<?php echo $this->partial('_stats.phtml',array('stats' => $p['stats'])); ?>'
+            data-title="<?php echo $p['name']; ?>" data-placement="auto">
+            <div class="picture"><img class="thumbnail" src="http://graph.facebook.com/<?php echo $p['fb_uid']; ?>/picture"></div>
+            <div class="description">
+                <?php if($p['injured']){ ?><i class="icon-medkit" style="color: #C00;"></i><?php } ?>
+            </div>
+            <?php if($this->deletable){ ?>
+                <a class="btn btn-danger"><i class="icon-thumbs-down"></i></a>
+            <?php } ?>
+            <?php if($p['injured']){ ?><a class="btn btn-success heal"><i class="icon-medkit"></i></a><?php } ?>
+        </div>
+    <?php } ?>
+</div>
+<script>
+    $(document).ready(function(){
+        $('#roster .player').mouseover(function(){
+            $(this).popover('show');
+        });
+        $('#roster .player').mouseout(function(){
+            $(this).popover('hide');
+        });
+
+        $('.btn.heal').click(function(){
+            $('#eventModal').modal({remote:'<?php echo $this->url(array('controller'=>'player','action'=>'heal')); ?>/player_id/'+$(this).parent().data('id')});
+        });
+    });
+
+    function confirmPlayerDelete(id){
+        if(confirm('Spieler wirklich aus dem Kader werfen?')){
+            $.ajax({
+                url: '<?php echo $this->url(array('controller'=>'player','action'=>'delete')); ?>/id/'+id,
+                success: function(data) {
+                    $("#roster").find("[data-slide='" + id + "']").remove();
+                }
+            });
+        }
+        return false;
+    }
+</script>

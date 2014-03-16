@@ -1,0 +1,14 @@
+<div class="stats">
+    <?php foreach($this->stats as $type => $stats){ ?>
+        <h5><?php echo $type; ?></h5>
+        <?php foreach($stats as $stat){ ?>
+            <div>
+                <i class="icon-<?php echo strtolower($stat['name']); ?>"></i>
+                <label><?php echo $stat['name']; ?></label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-<?php if($stat['points']<30){echo "danger";}elseif($stat['points']<70){echo "warning";}else{echo "success";} ?>" style="width: <?php echo $stat['points']; ?>%;"></div>
+                </div>
+            </div>
+        <?php } ?>
+    <?php } ?>
+</div>

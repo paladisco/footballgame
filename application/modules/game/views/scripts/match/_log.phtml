@@ -1,0 +1,4 @@
+<?php $log = array_reverse($this->log); ?>
+<div class="log">
+    <?php foreach($log as $event){ echo $this->partial('match/_event.phtml',array('event'=>$event)); } ?>
+</div>

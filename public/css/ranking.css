@@ -1,0 +1,21 @@
+#ranking .team{
+    padding: 5px;
+    background-color: #ccc;
+    border: 1px solid #999;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    margin: 0 10px 10px 0;
+}
+#ranking .team .picture{
+     float: left;
+     margin: 3px 5px 5px 0;
+}
+#ranking .team .name{
+    font-family: "Squada One";
+    font-weight: bold;
+    font-size: 16px;
+    text-transform: uppercase;
+}

@@ -1,0 +1,60 @@
+<?php
+$page = new Zend_Navigation_Page_Mvc();
+$front = Zend_Controller_Front::getInstance();
+$identity = Local_Model_Identity::getInstance();
+
+foreach ($this->container as $page)
+{
+	$page->setRoute('default');
+    $rel = $page->getRel();
+	$activeModule = $front->getRequest()->getModuleName();
+
+    $rights = $rel[rights];
+    if($identity->checkRights($rights) || $rights==''){
+
+        $isActive = ($page->getModule()==$activeModule && $activeModule!='default');
+        $liClass = array();
+        if($isActive){
+            $liClass[] = 'active';
+        }
+
+        if($page->getPages()){
+            $html[] = '<li class="dropdown">';
+            $liClass[] = "dropdown-toggle";
+            $additional = 'data-toggle="dropdown"';
+        }else{
+            $html[] = '<li>';
+            $additional = '';
+        }
+
+        $html[] = '<a class="'.implode(" ",$liClass).'" '.$additional.' href="'.$page->getHref().'">'.$page->getLabel().'</a>';
+
+        if($page->getPages()){
+
+            $html[] = '<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">';
+			foreach($page->getPages() as $subPage){
+
+                $rel = $subPage->getRel();
+				$isSubActive = $subPage->isActive(true);
+				$liClass = $isSubActive ? ' class="active"' : '';
+				$subrights = $rel[rights];
+                $params = $subPage->getParams();
+
+                $add = '';
+
+                if($identity->checkRights($subrights) || $subrights==''){
+    				$html[] = '<li><a'.$liClass.' href="'.$subPage->getHref().'">'.$subPage->getLabel()
+                        .$add.'</a></li>';
+    			}
+			}
+			$html[] = '</ul>';
+		}
+        $html[] = '</li>';
+
+    }
+
+}
+echo join('',$html);
+
+
+

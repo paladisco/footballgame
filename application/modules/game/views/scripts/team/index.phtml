@@ -1,0 +1,54 @@
+<div class="row">
+    <div class="col-lg-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Add Player</h3>
+            </div>
+            <div class="panel-body">
+                <?php if($this->friend){ ?>
+                    <h4>Rolling some Footballer Stats for <?php echo $this->friend['first_name']; ?>!</h4>
+                    <p>Reload Page if you're not happy!</p>
+                    <?php echo $this->partial('_stats.phtml',array('stats' => $this->stats)); ?>
+                    <form method="post" action="<?php echo $this->url(array('controller'=>'player','action'=>'add')); ?>">
+                        <input type="hidden" name="friend_id" value="<?php echo $this->friend['id']; ?>" />
+                        <input type="hidden" name="friend_name" value="<?php echo $this->friend['name']; ?>" />
+                        <input type="submit" class="btn btn-success" value="<?php echo $this->friend['name']; ?> ins Kader!" />
+                    </form>
+                <?php }else{ ?>
+                    <form method="post">
+                        <input type="text" autocomplete="off" name="friend_name" id="newPlayer">
+                        <input type="hidden" id="friend_id" name="friend_id">
+                        <input class="btn btn-primary" type="submit" value="Medizinische Checks">
+                    </form>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">My Roster</h3>
+            </div>
+            <div class="panel-body">
+                <?php echo $this->partial('_roster.phtml',array('players'=>$this->team['players'],'deleteable'=>'true')); ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $('#newPlayer').typeahead({
+        name: 'playerSelect',
+        prefetch: '<?php echo $this->url(array('controller'=>'player','action'=>'load-friends')); ?>',
+    }).on('typeahead:selected', function(e,dataset) {
+
+        $('#friend_id').attr('value',dataset.id);
+
+        var $typeahead = $(this),
+            $form = $typeahead.parents('form').first();
+
+        $form.submit();
+    });
+
+</script>

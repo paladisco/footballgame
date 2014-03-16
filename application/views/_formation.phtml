@@ -1,0 +1,23 @@
+<div class="pitch" id="pitch">
+    <div class="formation">
+        <div class="offense line">
+            <?php echo $this->partial('_player.phtml',array('position'=>11,'player'=>$this->formation['11'])); ?>
+            <?php echo $this->partial('_player.phtml',array('position'=>10,'player'=>$this->formation['10'])); ?>
+        </div>
+        <div class="midfield line">
+            <?php echo $this->partial('_player.phtml',array('position'=>9,'player'=>$this->formation['9'])); ?>
+            <?php echo $this->partial('_player.phtml',array('position'=>8,'player'=>$this->formation['8'])); ?>
+            <?php echo $this->partial('_player.phtml',array('position'=>7,'player'=>$this->formation['7'])); ?>
+            <?php echo $this->partial('_player.phtml',array('position'=>6,'player'=>$this->formation['6'])); ?>
+        </div>
+        <div class="defense line">
+            <?php echo $this->partial('_player.phtml',array('position'=>5,'player'=>$this->formation['5'])); ?>
+            <?php echo $this->partial('_player.phtml',array('position'=>4,'player'=>$this->formation['4'])); ?>
+            <?php echo $this->partial('_player.phtml',array('position'=>3,'player'=>$this->formation['3'])); ?>
+            <?php echo $this->partial('_player.phtml',array('position'=>2,'player'=>$this->formation['2'])); ?>
+        </div>
+        <div class="goalkeeper line">
+            <?php echo $this->partial('_player.phtml',array('position'=>1,'player'=>$this->formation['1'])); ?>
+        </div>
+    </div>
+</div>

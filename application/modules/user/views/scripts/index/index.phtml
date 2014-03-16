@@ -1,0 +1,18 @@
+<div class="controls">
+    <a class="btn btn-large modalTrigger" href="<?php echo $this->url(array('action'=>'add')); ?>">
+        <i class="icon-plus-sign"></i> Add new entry
+    </a>
+</div>
+<p>
+    <?php if($this->active){
+        ?><a href="<?php echo $this->url(array('active'=>0)); ?>" class="btn"><i class="icon-lock"></i>
+        gesperrte anzeigen</a><?
+    }else{
+        ?><a href="<?php echo $this->url(array('active'=>1)); ?>" class="btn"><i class="icon-unlock"></i>
+        aktive anzeigen</a><?
+    }
+    ?>
+</p>
+<?php
+echo $this->partial('index/_elements.phtml',array('result'=>$this->result,'billed'=>$this->billed));
+?>

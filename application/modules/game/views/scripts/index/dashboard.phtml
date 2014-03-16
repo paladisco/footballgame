@@ -1,0 +1,91 @@
+<div class="row">
+    <div class="col-lg-7" id="formation">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Formation</h3>
+            </div>
+            <div class="panel-body">
+                <?php echo $this->partial('_formation.phtml',array('formation'=>$this->formation)); ?>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="panel panel-info clearfix">
+            <div class="panel-heading">
+                <h3 class="panel-title">Controls</h3>
+            </div>
+            <div class="panel-body">
+                <p>Hier kannst du verschiedene Random Events auslösen. Das ist sehr experimentiell und auf eigene Gefahr auszutesten! Deine Spieler könnten dabei zu schaden kommen!</p>
+                <a class="btn btn-success random"><i class="icon-random"></i> Random Event</a>
+            </div>
+        </div>
+        <div class="panel panel-default clearfix">
+            <div class="panel-heading">
+                <a href="<?php echo $this->url(array('controller'=>'team','action'=>'index')); ?>" class="btn btn-primary btn-small pull-right">
+                    <i class="icon-plus-sign"></i> Add Friends to Team!</a>
+                <h3 class="panel-title">Roster</h3>
+            </div>
+            <div class="panel-body">
+                <p>Das ist dein aktuelles Kader. Ziehe die Spieler mit der Maus (Support für Mobiltelefone kommt vielleicht noch) in die Formation herüber und spiele den Taktikfuchs!</p>
+                <?php echo $this->partial('_roster.phtml',array('players'=>$this->team['players'])); ?>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+$(function(){
+    $('#roster .player .picture').draggable( {
+        stack: '#roster div.player',
+        cursor: 'move',
+        revert: true
+    });
+
+    $('#pitch .player .picture').draggable( {
+        stack: '#pitch div.player',
+        cursor: 'move',
+        revert: true
+    });
+
+    $('#pitch .position').droppable( {
+        accept: 'div.player .picture',
+        hoverClass: 'hovered',
+        drop: updatePlayerPosition
+    });
+
+    $('#roster .player .stats').hide();
+    $('#roster .player').mouseenter(function(e){
+        e.stopPropagation();
+        $(this).find('.stats').slideDown();
+    });
+    $('#roster .player').mouseleave(function(e){
+        e.stopPropagation();
+        $(this).find('.stats').slideUp();
+    });
+
+    $('.btn.random').click(function(){
+        $('#eventModal').modal({remote:'<?php echo $this->url(array('controller'=>'event','action'=>'trigger')); ?>'});
+    });
+
+});
+
+function updatePlayerPosition( event, ui ) {
+    var position = $(this).data('position');
+    var player_id = ui.draggable.closest('.player').data('id');
+
+    $(this).find('.picture').html(ui.draggable.html());
+    $(this).find('.stats').html(ui.draggable.closest('.player').data('content'));
+    $(this).data('id',player_id);
+
+    $("#pitch .player").each(function(index, value) {
+        if($(this).data('id')==player_id && $(this).data('position')!=position){
+            $(this).html('<div class="picture"></div><div class="name"></div><div class="stats"></div>');
+        }
+    });
+
+    $.ajax({
+        url: '<?php echo $this->url(array('controller'=>'player','action'=>'update-position')) ?>',
+        data: {'position':position,'player_id':player_id}
+    });
+}
+</script>
+

@@ -1,0 +1,36 @@
+<div class="row">
+    <div class="col-lg-8">
+        <div class="panel">
+            <div class="panel-heading"><h3>Last Events</h3></div>
+            <div id="matchLog">
+                <?php foreach($this->log as $l){
+                    echo $this->partial('_event',array('event'=>$l));
+                } ?>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3>Controls</h3>
+            </div>
+            <div class="controls" id="eventControls">
+                <a href="<?php echo $this->url(array('action'=>'trigger')); ?>">Trigger Event!</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function(){
+
+        $('.progress-bar').each(function() {
+            var me = $(this);
+            var perc = me.data("percentage")/100;
+            var maxWidth = parseInt(me.parent().css('width'));
+
+            me.animate({'width': parseInt(maxWidth*perc)+'px'},1000)
+
+        });
+
+    });
+</script>

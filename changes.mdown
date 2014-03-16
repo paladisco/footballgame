@@ -1,0 +1,7 @@
+0.1.0 alpha
+----
+* Build a Team from your Facebook friends
+* Roll new Player Stats
+* Fire random events that influence your players stats
+* Challenge Friends to a match
+* Minigame for Shots on goal

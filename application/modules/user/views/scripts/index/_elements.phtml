@@ -1,0 +1,41 @@
+<table id="mainTable" class="table sortable table-bordered table-striped">
+    <thead>
+	<tr>
+        <th></th>
+        <th></th>
+        <th>Username</th>
+        <th>Rolle</th>
+        <th>Name</th>
+        <th>E-Mail</th>
+        <th>aktiv</th>
+	</tr>
+	</thead>
+	<tbody>
+	<?php
+        $roleModel = new Local_Model_DbTable_UserRole();
+		foreach($this->result as $r){
+	?>
+		<tr>
+            <td class="vmiddle">
+                <a class="btn" href="<?php echo $this->url(array('action'=>'edit', 'id'=>$r->id)); ?>">
+                    <i class="icon-edit"></i>
+                </a>
+            </td>
+            <td class="vmiddle"><?php echo $this->user()->renderProfilePic($r->id); ?>
+            <td class="vmiddle"><?php echo $r->username; ?>
+            <td class="vmiddle"><?php echo $roleModel->getName($r->role_id); ?>
+            <td class="vmiddle"><?php echo $r->realname; ?>
+            <td class="vmiddle"><?php echo $r->email; ?>
+			<td class="vmiddle">
+                <a href="<?php echo $this->url(array('action'=>'activate', 'id'=>$r->id)); ?>">
+                    <?php if($r->active==0){ ?>
+                        <i class="icon-unlock"></i> aktivieren
+                    <?php }else{ ?>
+                        <i class="icon-lock"></i> sperren
+                    <?php } ?>
+                </a>
+            </td>
+		</tr>
+	<?php } ?>
+	</tbody>
+</table>

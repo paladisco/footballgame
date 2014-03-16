@@ -1,0 +1,60 @@
+#roster .player{
+    padding: 5px;
+    background-color: #ccc;
+    border: 1px solid #999;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    margin: 0 10px 10px 0;
+    width: 120px;
+    float: left;
+}
+#roster .player.injured{
+    background-color: #fcc;
+}
+#roster .player .picture{
+    float: left;
+    margin: 3px 5px 5px 0;
+    cursor: move;
+}
+#roster .player .name{
+    font-family: "Squada One";
+    font-weight: bold;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+#roster .player .stats i{
+    display: none
+}
+#roster .player .stats .progress{
+    height: 15px;
+    margin-bottom:2px;
+}
+.player .stats{
+    padding-top: 5px;
+    clear: both;
+}
+.player .stats > div{
+    clear: both;
+}
+.player .stats i{
+    float: left;
+}
+.player .stats h5{
+    margin-left: 55px;
+    text-transform: uppercase;
+    clear: both;
+}
+.player .stats label{
+    float: left;
+    width: 50px;
+    font-weight: normal;
+    text-align: right;
+    font-size: 11px;
+    margin-right: 5px;
+}
+.player .stats .progress{
+    margin-bottom: 3px;
+}

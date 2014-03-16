@@ -26,7 +26,7 @@
                 <h3 class="panel-title">Roster</h3>
             </div>
             <div class="panel-body">
-                <p>Das ist dein aktuelles Kader. Ziehe die Spieler mit der Maus (Support für Mobiltelefone kommt vielleicht noch) in die Formation herüber und spiele den Taktikfuchs!</p>
+                <p>Das ist dein aktuelles Kader. Fahre mit der Maus über die Spieler um mehr Infos zu erhalten. Sei ein Taktikfuchs und ziehe die Spieler mit gedrückter Maustaste in die Formation herüber. Support für Mobiltelefone folgt zu einem späteren Zeitpunkt!</p>
                 <?php echo $this->partial('_roster.phtml',array('players'=>$this->team['players'])); ?>
             </div>
         </div>
@@ -86,6 +86,10 @@ function updatePlayerPosition( event, ui ) {
         url: '<?php echo $this->url(array('controller'=>'player','action'=>'update-position')) ?>',
         data: {'position':position,'player_id':player_id}
     });
+
+    if($('#pitch .player img').length==11){
+        $('.lessthan11').hide();
+    }
 }
 </script>
 

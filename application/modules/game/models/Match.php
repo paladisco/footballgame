@@ -453,8 +453,8 @@ class Game_Model_Match
     }
 
     private function _switchPossession(){
-        //$this->_possession = ($this->_possession + 1) % 2;
-        //$this->_situationType = ($this->_possession?'defense':'offense');
+        $this->_possession = ($this->_possession + 1) % 2;
+        $this->_situationType = ($this->_possession?'defense':'offense');
     }
 
     private function _losePossession($toPosition=null,$commented=true){
@@ -473,10 +473,10 @@ class Game_Model_Match
     }
 
     private function _coinflip(){
-        $flip = rand(0,1);
-        $this->_possession = $flip;
+        $this->_flip = rand(0,1);
+        $this->_possession = $this->_flip;
         $this->_switchPossession();
-        $this->_logEvent($this->getTeam($flip)->getName().' wins the Coin Toss!',null,true);
+        $this->_logEvent($this->getTeam($this->_flip)->getName().' wins the Coin Toss!',null,true);
         $this->_kickOff();
     }
 

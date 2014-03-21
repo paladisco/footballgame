@@ -6,7 +6,7 @@
         <?php foreach($this->friends as $f){ ?>
             <div class="team clearfix" data-id="<?php echo $f['id']; ?>">
                 <div class="name"><?php echo $f['name']; ?></div>
-                <div class="picture"><img src="<?php echo $f['profile_pic']; ?>"></div>
+                <div class="picture"><img class="thumbnail" src="http://graph.facebook.com/<?php echo $f['fb_uid']; ?>/picture"></div>
                 <div class="description"><?php echo $f['fb_name']; ?></div>
                 <a class="btn btn-default" href="<?php echo $this->url(array('controller'=>'match','action'=>'index','away_team_id'=>$f['id'])); ?>">
                     <i class="icon-circle-arrow-right"></i> Challenge <?php echo $f['fb_name']; ?>

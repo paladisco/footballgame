@@ -9,7 +9,9 @@ function ajaxCall(url,target,callbackFunction) {
     });
 }
 
-$('.modal').on('hidden.bs.modal', function() {
-    $(this).removeData('bs.modal');
-    $(this).html('')
+$(document).ready(function(){
+    $('.modal').on('hidden.bs.modal', function() {
+        $(this).removeData('bs.modal');
+        $(this).html('')
+    });
 });

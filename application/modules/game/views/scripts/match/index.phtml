@@ -15,8 +15,13 @@
                 </a>
                 <h3 class="panel-title">Controls</h3>
             </div>
-            <div class="panel-body controls" id="matchControls">
-                <?php echo $this->partial('match/_controls.phtml',array('situation'=>$this->situation)); ?>
+            <div class="panel-body">
+                <div class="controls" id="matchControls">
+                    <?php echo $this->partial('match/_controls.phtml',array('situation'=>$this->situation)); ?>
+                </div>
+                <div id="skillContainer">
+
+                </div>
             </div>
         </div>
         <div class="panel panel-primary">
@@ -50,66 +55,149 @@
 </div><!-- /.modal -->
 
 <script>
-    $(document).on('click','.actionButton',function(){
+$(document).ready(function () {
+    $('.skillContainer').hide();
+    initControls();
+});
 
+function initControls(){
+    $('#matchControls .actionButton').click(function(){
         var button = $(this);
         var instruction = button.data('instruction');
         button.button('loading');
 
-        if(instruction==='shoot'){
-            $('#skillgameModal').modal({
-                remote: "<?php echo $this->url(array('action'=>'skillgame')); ?>"
-            })
-        }else{
-            loadGameAction(instruction)
+        if (button.hasClass('skillModified')) {
+            var skill = button.data('skill');
+            initSkillModifier(instruction, skill, loadGameAction);
+        } else {
+            console.log('Regular');
+            loadGameAction(instruction);
         }
-
-
     });
+}
 
-    function loadGameAction(instruction){
+function animateGauge(container,skill){
+    var width = parseInt(container.css('width'));
+    var parentWidth = parseInt(container.parent().css('width'));
+    console.log(width+' '+parentWidth+' '+skill)
+    if(skill=='power'){
+        if (width < 10) {
+            container.css('width', '100%');
+        } else {
+            container.css('width', '0%');
+        }
+    }else if(skill=='accuracy'){
+        if (width < 10) {
+            container.css('width', '50%');
+        } else if ( width > (parentWidth/2)-10 && width <= (parentWidth/2)) {
+            container.css('width', '100%');
+        }  else if ( width >= (parentWidth/2) && width < (parentWidth/2)+10) {
+            container.css('width', '0%');
+        } else{
+            container.css('width', '50%');
+        }
+    }
+}
+function initSkillModifier(instruction, skill, callback) {
+
+    var progress = document.createElement('div');
+    $(progress).addClass('progress '+skill);
+
+    var progressBar = document.createElement('div');
+    $(progressBar).addClass('progress-bar gauge');
+    $(progressBar).css('width','50%');
+
+    var hitButton = document.createElement('a');
+    $(hitButton).addClass('btn hit btn-primary');
+    $(hitButton).html('Hit it!');
+
+    $(progressBar).appendTo($(progress));
+    $(progress).appendTo($('#skillContainer'));
+    $(hitButton).appendTo($('#skillContainer'));
+
+    animateGauge($(progressBar),skill);
+    var gaugeInterval = setInterval(function () {
+        animateGauge($(progressBar),skill);
+    }, parseFloat($(progressBar).css('transition-duration')) * 1000);
+
+    $(hitButton).click(function(){
+        console.log('Hit!');
+        callback(instruction, skill);
+    })
+};
+
+function loadEvent(data,i) {
+    if (data.html[++i]) {
+        $('#matchLog .log').prepend(data.html[i]);
+        $('#matchLog .log .row:first').slideDown(100, function () {
+
+            console.log(data.log[i]);
+            $('.pitch .ball').animate({
+                'left': data.log[i].ball.x + '%',
+                'top': data.log[i].ball.y + '%'
+            }, 200, "linear");
+
+            if (data.log[i].player_pic) {
+                var img = $('<img />'); //Equivalent: $(document.createElement('img'))
+                img.attr('class', 'thumbnail');
+                img.attr('src', data.log[i].player_pic);
+                $('#pitch .player').html(img);
+                if (data.log[i].side == 1) {
+                    $('#pitch .player').animate({
+                        'left': (data.log[i].ball.x - 10) + '%',
+                        'top': data.log[i].ball.y + '%'
+                    }, 200);
+                } else if (data.log[i].side == 2) {
+                    $('#pitch .player').animate({
+                        'left': (data.log[i].ball.x + 10) + '%',
+                        'top': data.log[i].ball.y + '%'
+                    }, 200);
+                }
+            }
+
+            setTimeout(loadEvent(data,i), 700);
+        });
+    } else {
+        $('#matchControls').html(data.controls);
+        initControls();
+    }
+}
+
+function loadGameAction(instruction, skill) {
+
+    var skillModifier = 0;
+    if(typeof skill !== 'undefined'){
+        skillModifier = (parseInt($('#skillContainer').find('.gauge').css('width')) / parseInt($('#skillContainer').find('.gauge').parent().css('width'))) * 100;
+        $('#skillContainer').html('');
+    }
+    if (instruction == 'shoot') {
+
+        $('#skillgameModal').modal({
+            remote: "<?php echo $this->url(array('action'=>'skillgame')); ?>"
+        });
+
+    } else {
+
         $.ajax({
             url: "<?php echo $this->url(array('action'=>'play')); ?>",
-            data: {'instruction': instruction}
-        }).done(function ( jsonData ) {
+            data: {
+                'instruction': instruction,
+                'skill': skillModifier
+            }
+        }).done(function (jsonData) {
             data = $.parseJSON(jsonData);
 
             var i = -1;
 
-            loadEvent = function(){
-                if(data.html[++i]){
-                    $('#matchLog .log').prepend(data.html[i]);
-                    $('#matchLog .log .row:first').slideDown( 100,function(){
-
-                        $('.pitch .ball').animate({ 'left':data.log[i].ball.x+'%', 'top':data.log[i].ball.y+'%' }, 200, "linear");
-
-                        if(data.log[i].player_pic){
-                            var img = $('<img />'); //Equivalent: $(document.createElement('img'))
-                            img.attr('class', 'thumbnail');
-                            img.attr('src', data.log[i].player_pic);
-                            $('#pitch .player').html(img);
-                            if(data.log[i].side==1){
-                                $('#pitch .player').animate({ 'left':(data.log[i].ball.x-10)+'%', 'top':data.log[i].ball.y+'%' },200);
-                            }else if(data.log[i].side==2){
-                                $('#pitch .player').animate({ 'left':(data.log[i].ball.x+10)+'%', 'top':data.log[i].ball.y+'%' },200);
-                            }
-                        }
-
-                        setTimeout(loadEvent,700);
-                    });
-                }else{
-                    $('#matchControls').html(data.controls);
-                }
-            }
-            loadEvent();
+            loadEvent(data,i);
 
             setTimeout(function () {
                 $('#skillgameModal').modal('hide');
                 $('#skillgameModal').removeData('bs.modal')
-            },1000);
+            }, 1000);
 
             $('#summary').html(data.summary);
         });
     }
-
+}
 </script>

@@ -1,3 +1,21 @@
+#skillContainer{
+    padding: 10px 0;
+}
+.power .progress-bar{
+    -webkit-transition: width 1s ease-in-out;
+    transition: width 1s ease-in-out;
+}
+
+.accuracy .progress-bar{
+    -webkit-transition: width 0.5s linear;
+    transition: width 0.5s linear;
+    background: none;
+    border: none;
+    box-shadow: none;
+    border-right: 5px solid #F00;
+}
+
+
 #skillgame .background{
     background-image: url(images/penalty.jpg);
     width: 450px;

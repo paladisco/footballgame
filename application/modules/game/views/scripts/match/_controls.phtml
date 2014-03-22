@@ -10,16 +10,16 @@ if(!$s['running']){ ?>
             Dribble on!
         </a>
     <?php } ?>
-    <a class="btn btn-primary actionButton" data-loading-text="attempting..." data-instruction="pass">
+    <a class="btn btn-primary actionButton skillModified" data-skill="accuracy" data-loading-text="attempting..." data-instruction="pass">
         Pass the ball!
     </a>
     <?php if($s['shoot']){ ?>
-        <a data-toggle="modal" data-target="#modalForm" data-remote="<?php echo $this->url(array('action'=>'skillgame')); ?>" class="btn btn-primary actionButton" data-loading-text="attempting..." data-instruction="shoot">
+        <a class="btn btn-primary actionButton skillModified" data-skill="power" data-loading-text="attempting..." data-instruction="shoot">
             SHOOT!
         </a>
     <?php } ?>
     <?php if($s['clear']){ ?>
-        <a class="btn btn-primary actionButton" data-loading-text="attempting..." data-instruction="clear">
+        <a class="btn btn-primary actionButton skillModified" data-skill="power" data-loading-text="attempting..." data-instruction="clear">
             clear Ball!
         </a>
     <?php } ?>

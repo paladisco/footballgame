@@ -1,5 +1,14 @@
 <div class="row" id="match">
     <div class="col-lg-8">
+        <a class="pull-right btn btn-danger btn-small" id="actionButton" href="<?php echo $this->url(array('reset'=>1)); ?>">
+            <i class="icon-refresh"></i> Reset Match
+        </a>
+        <div class="controls" id="matchControls">
+            <?php echo $this->partial('match/_controls.phtml',array('situation'=>$this->situation)); ?>
+        </div>
+        <div id="skillContainer">
+
+        </div>
         <div class="panel panel-default">
             <div class="panel-heading"><h3 class="panel-title">Match Log</h3></div>
             <div id="matchLog" class="panel-body">
@@ -8,19 +17,12 @@
         </div>
     </div>
     <div class="col-lg-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <a class="pull-right btn btn-danger btn-small" id="actionButton" href="<?php echo $this->url(array('reset'=>1)); ?>">
-                    <i class="icon-refresh"></i> Reset Match
-                </a>
-                <h3 class="panel-title">Controls</h3>
-            </div>
-            <div class="panel-body">
-                <div class="controls" id="matchControls">
-                    <?php echo $this->partial('match/_controls.phtml',array('situation'=>$this->situation)); ?>
-                </div>
-                <div id="skillContainer">
-
+        <div class="panel panel-success">
+            <div class="panel-heading"><h3 class="panel-title">Pitch Situation</h3></div>
+            <div id="pitch" class="panel-body">
+                <?php $pitch = $this->pitch; ?>
+                <div class="pitch">
+                    <?php echo $this->partial('match/_pitch.phtml',array('pitch'=>$this->pitch)); ?>
                 </div>
             </div>
         </div>
@@ -38,15 +40,7 @@
                 </div>
             </div>
         </div>
-        <div class="panel panel-success">
-            <div class="panel-heading"><h3 class="panel-title">Pitch Situation</h3></div>
-            <div id="pitch" class="panel-body">
-                <?php $pitch = $this->pitch; ?>
-                <div class="pitch">
-                    <?php echo $this->partial('match/_pitch.phtml',array('pitch'=>$this->pitch)); ?>
-                </div>
-            </div>
-        </div>
+
     </div>
 </div>
 
@@ -64,22 +58,30 @@ function initControls(){
     $('#matchControls .actionButton').click(function(){
         var button = $(this);
         var instruction = button.data('instruction');
-        button.button('loading');
+        var skill = button.data('skill');
+        //button.button('loading');
+        $('#matchControls .actionButton').hide();
 
-        if (button.hasClass('skillModified')) {
-            var skill = button.data('skill');
+        if (instruction=='shoot'){
+            // Hook Shooting Skillgame
+            initSkillModifier(instruction, skill, function(instruction,skill){
+                $('#skillgameModal').modal({
+                    remote: "<?php echo $this->url(array('action'=>'skillgame')); ?>/skill/"+skill
+                });
+            });
+        }
+        else if (button.hasClass('skillModified')) {
             initSkillModifier(instruction, skill, loadGameAction);
         } else {
-            console.log('Regular');
             loadGameAction(instruction);
         }
+
     });
 }
 
 function animateGauge(container,skill){
     var width = parseInt(container.css('width'));
     var parentWidth = parseInt(container.parent().css('width'));
-    console.log(width+' '+parentWidth+' '+skill)
     if(skill=='power'){
         if (width < 10) {
             container.css('width', '100%');
@@ -88,13 +90,9 @@ function animateGauge(container,skill){
         }
     }else if(skill=='accuracy'){
         if (width < 10) {
-            container.css('width', '50%');
-        } else if ( width > (parentWidth/2)-10 && width <= (parentWidth/2)) {
             container.css('width', '100%');
-        }  else if ( width >= (parentWidth/2) && width < (parentWidth/2)+10) {
+        } else {
             container.css('width', '0%');
-        } else{
-            container.css('width', '50%');
         }
     }
 }
@@ -118,10 +116,11 @@ function initSkillModifier(instruction, skill, callback) {
     animateGauge($(progressBar),skill);
     var gaugeInterval = setInterval(function () {
         animateGauge($(progressBar),skill);
-    }, parseFloat($(progressBar).css('transition-duration')) * 1000);
+    }, parseFloat($(progressBar).css('transition-duration')) * 1100);
 
     $(hitButton).click(function(){
-        console.log('Hit!');
+        clearInterval(gaugeInterval);
+        $(progressBar).css('width',$(progressBar).css('width'));
         callback(instruction, skill);
     })
 };
@@ -129,33 +128,32 @@ function initSkillModifier(instruction, skill, callback) {
 function loadEvent(data,i) {
     if (data.html[++i]) {
         $('#matchLog .log').prepend(data.html[i]);
-        $('#matchLog .log .row:first').slideDown(100, function () {
+        $('#matchLog .log .row:first').slideDown(500, function () {
 
-            console.log(data.log[i]);
             $('.pitch .ball').animate({
                 'left': data.log[i].ball.x + '%',
                 'top': data.log[i].ball.y + '%'
-            }, 200, "linear");
+            }, 500, "linear");
 
             if (data.log[i].player_pic) {
+                $('#pitch .player').html('');
+                if (data.log[i].side == 1) {
+                    $('#pitch .player').css('left', (data.log[i].ball.x - 2) + '%');
+                    $('#pitch .player').css('top', data.log[i].ball.y + 1 + '%');
+                } else if (data.log[i].side == 2) {
+                    $('#pitch .player').css('left', (data.log[i].ball.x + 2) + '%');
+                    $('#pitch .player').css('top', data.log[i].ball.y + 1 + '%');
+                }
                 var img = $('<img />'); //Equivalent: $(document.createElement('img'))
                 img.attr('class', 'thumbnail');
                 img.attr('src', data.log[i].player_pic);
                 $('#pitch .player').html(img);
-                if (data.log[i].side == 1) {
-                    $('#pitch .player').animate({
-                        'left': (data.log[i].ball.x - 10) + '%',
-                        'top': data.log[i].ball.y + '%'
-                    }, 200);
-                } else if (data.log[i].side == 2) {
-                    $('#pitch .player').animate({
-                        'left': (data.log[i].ball.x + 10) + '%',
-                        'top': data.log[i].ball.y + '%'
-                    }, 200);
-                }
             }
 
-            setTimeout(loadEvent(data,i), 700);
+            console.log('Recursively looking for next!');
+            setTimeout(function(){
+                loadEvent(data,i);
+            }, 1500);
         });
     } else {
         $('#matchControls').html(data.controls);
@@ -163,41 +161,39 @@ function loadEvent(data,i) {
     }
 }
 
-function loadGameAction(instruction, skill) {
+function loadGameAction(instruction, skill, callback) {
 
     var skillModifier = 0;
     if(typeof skill !== 'undefined'){
         skillModifier = (parseInt($('#skillContainer').find('.gauge').css('width')) / parseInt($('#skillContainer').find('.gauge').parent().css('width'))) * 100;
         $('#skillContainer').html('');
     }
-    if (instruction == 'shoot') {
 
-        $('#skillgameModal').modal({
-            remote: "<?php echo $this->url(array('action'=>'skillgame')); ?>"
-        });
+    $.ajax({
+        url: "<?php echo $this->url(array('action'=>'play')); ?>",
+        data: {
+            'instruction': instruction,
+            'skill': skillModifier
+        }
+    }).done(function (jsonData) {
+        data = $.parseJSON(jsonData);
 
-    } else {
-
-        $.ajax({
-            url: "<?php echo $this->url(array('action'=>'play')); ?>",
-            data: {
-                'instruction': instruction,
-                'skill': skillModifier
+        if(typeof callback !== 'undefined'){
+            for(var j=0;j<data.log.length;j++){
+                if(data.log[j].action!=null){
+                    callback(data.log[j].action);
+                }
             }
-        }).done(function (jsonData) {
-            data = $.parseJSON(jsonData);
-
-            var i = -1;
-
-            loadEvent(data,i);
-
             setTimeout(function () {
                 $('#skillgameModal').modal('hide');
                 $('#skillgameModal').removeData('bs.modal')
-            }, 1000);
+                loadEvent(data,-1);
+            }, 1500);
+        }else{
+            loadEvent(data,-1);
+        }
 
-            $('#summary').html(data.summary);
-        });
-    }
+        $('#summary').html(data.summary);
+    });
 }
 </script>

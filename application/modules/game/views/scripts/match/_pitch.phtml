@@ -1,6 +1,6 @@
 <?php $pitch = $this->pitch; ?>
 <div class="ball" style="top: <?php echo $pitch['ball']['y']; ?>%; left: <?php echo $pitch['ball']['x']; ?>%"></div>
-<div class="player" style="top: <?php echo $pitch['ball']['y']; ?>%; left: <?php echo $pitch['ball']['x']+($pitch['side']==1?-10:10); ?>%">
+<div class="player" style="top: <?php echo $pitch['ball']['y']-1; ?>%; left: <?php echo $pitch['ball']['x']+($pitch['side']==1?-2:2); ?>%">
     <?php if($this->pitch['player']){ ?>
         <img src="<?php echo $this->pitch['player']['profile_pic']; ?>" class="thumbnail">
     <?php } ?>

@@ -77,13 +77,15 @@
 #match .pitch{
     background-image: url(http://upload.wikimedia.org/wikipedia/commons/b/b9/Soccer_field_-_empty.svg);
     position: relative;
-    min-height: 200px;
+    padding-bottom: 64%;
     background-color: #006600;
     background-repeat: no-repeat;
     background-size: 100%;
 }
 #match .pitch .player{
     position: absolute;
+    -webkit-transition: width 1s ease-in-out;
+    transition: width 1s ease-in-out;
 }
 #match .pitch .ball{
     position: absolute;
@@ -95,6 +97,8 @@
     background-repeat: no-repeat;
     background-size: 100%;
     z-index: 90;
+    -webkit-transition: width 1s ease-in-out;
+    transition: width 1s ease-in-out;
 }
 #match .pitch .player{
     position: absolute;

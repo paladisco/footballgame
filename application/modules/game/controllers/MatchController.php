@@ -49,8 +49,9 @@ class Game_MatchController extends Local_Controller_Action
         if($this->_match){
 
             $instruction = $this->getRequest()->getParam('instruction');
+            $skillModifier = $this->_getParam('skill');
 
-            $this->_match->setOffenseInstruction($instruction);
+            $this->_match->setOffenseInstruction($instruction,$skillModifier);
             $this->_match->loop();
 
             $summary = $this->_match->getSummary();
@@ -86,6 +87,7 @@ class Game_MatchController extends Local_Controller_Action
             $this->view->keeper = $this->_match->getTeam(Game_Model_Match::AWAY_TEAM)->getPlayerByPosition(1);
             $this->view->player = $this->_match->getPlayerInPossession();
             $this->view->difficulty = $this->_match->getShotDifficulty();
+            $this->view->skillModifier = $this->_getParam('skill');
 
         }
     }

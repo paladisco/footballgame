@@ -1,7 +1,7 @@
 <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">
-<!--            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
+            <!--            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
             <h4 class="modal-title">Your chance to score!</h4>
         </div>
         <div class="modal-body">
@@ -30,23 +30,19 @@
 
 <script>
     $('.target').click(function(){
-        console.log('shot');
-        shootBall($(this));
+
+        var target = $(this);
+        loadGameAction('shoot',true,function(action){
+            shootBall(target,action);
+        })
+
     });
 
-    $(document).ready(function(){
-        //var keeperPosition = <?php echo rand(0,2); ?>;
-        //$('#keeper').appendTo($('#goal').find('.keeper').get(keeperPosition));
-    });
-
-    function shootBall(target){
+    function shootBall(target,action){
         var ball = $('#ball');
         var goal = $('#goal');
 
-        var playerSkill = <?php echo $this->keeper->getSkill(); ?>;
-        var difficulty = <?php echo $this->difficulty; ?>;
-
-        if(difficulty<playerSkill){
+        if(action!='miss'){
             var bezier_params = {
                 start: {
                     x: parseInt(ball.css('left')),
@@ -60,7 +56,6 @@
                     length: 0.25
                 }
             }
-            var miss = false;
         }else{
             var bezier_params = {
                 start: {
@@ -75,40 +70,31 @@
                     length: 0.25
                 }
             }
-            var miss = true;
         }
-        console.log(bezier_params);
-
         ball.animate({path : new $.path.bezier(bezier_params),rotation: 360},1000);
         ball.find('img').animate({width: "-=40", height: "-=40"},1000);
 
-        setTimeout(function(){keeperSave(target.data('coord'),miss)},500);
+        setTimeout(function(){keeperSave(target.data('coord'),action)},500);
     }
 
-    function keeperSave(coord,miss){
+    function keeperSave(coord,action){
 
         var keeper = $('#keeper');
-        var keeperSkill = <?php echo $this->keeper->getSkill(); ?>;
-        var skillThrow = Math.floor(Math.random()*100)+1;
-        var highLow = (Math.random()*2)>1;
-        if(miss===true){
-            loadGameAction('miss');
-        }
-        else if(skillThrow<keeperSkill*.7){
-            loadGameAction('save');
+        if(action=='save'){
             var target = $('#goal').find("[data-coord='" + coord + "']");
         }
-        else{
+        else if(action=='score'){
             var targetCoord=coord;
             while(coord==targetCoord){
                 var targetCoord = 1 + Math.floor(Math.random() * 6);
             }
             var target = $('#goal').find("[data-coord='" + targetCoord + "']");
-            loadGameAction('score');
         }
-        var leftTarget = target.get(0).offsetLeft+Math.floor(parseInt(target.css('width'))/2);
-        var topTarget = target.get(0).offsetTop+Math.floor(parseInt(target.css('height'))/2)-30;
-        keeper.animate({left:leftTarget,top:topTarget},500);
+        if(typeof target !== 'undefined'){
+            var leftTarget = target.get(0).offsetLeft+Math.floor(parseInt(target.css('width'))/2);
+            var topTarget = target.get(0).offsetTop+Math.floor(parseInt(target.css('height'))/2)-30;
+            keeper.animate({left:leftTarget,top:topTarget},500);
+        }
 
     }
 </script>

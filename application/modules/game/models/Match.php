@@ -16,6 +16,7 @@ class Game_Model_Match
     private $_offenseInstruction;
     private $_defenseInstruction;
     private $_situationType;
+    private $_skillModifier;
 
     private $_ball;
 
@@ -62,8 +63,9 @@ class Game_Model_Match
         $this->_looplog = array();
     }
 
-    public function setOffenseInstruction($instruction){
+    public function setOffenseInstruction($instruction,$skillModifier){
         $this->_offenseInstruction = $instruction;
+        $this->_skillModifier = $skillModifier;
     }
 
     public function setDefenseInstruction($instruction){
@@ -187,16 +189,18 @@ class Game_Model_Match
     }
 
     public function getDistanceToGoal(){
-        if($this->_possession==0){
+        if($this->_possession==HOME_TEAM){
             return 100-$this->_ball['x'];
         }else{
             return $this->_ball['x'];
         }
     }
 
-    public function loop(){
+    public function loop($resetLog=true){
 
-        $this->_resetLoopLog();
+        if($resetLog){
+            $this->_resetLoopLog();
+        }
 
         if($this->hasEnded()){
             return false;
@@ -247,6 +251,7 @@ class Game_Model_Match
             }
         }
 
+
         // Check for Overtime at the end of each half
         if($this->_minute==45){
             $this->_rollOvertime();
@@ -257,6 +262,9 @@ class Game_Model_Match
         }
 
         if(count($this->getLoopLog())){
+            if($this->_possession == self::AWAY_TEAM){
+                $this->loop(false);
+            }
             return true;
         }else{
             return $this->loop();
@@ -415,7 +423,7 @@ class Game_Model_Match
         }else{
             $this->_logEvent($this->getPlayerInPossession()->getName().' completely misses the Target. What a waster!',null,true,true);
             $this->_losePossession(1,false);
-            $this->_logEvent('It comes for a goal kick!',null,true,true);
+            $this->_logEvent('It comes for a goal kick!',null,true,true,null,null,'miss');
         }
     }
 
@@ -426,9 +434,9 @@ class Game_Model_Match
             if(($roll<=$skill && $action!='score') || $action=='save'){
                 $this->reassignPossession($goalkeeper);
                 $this->_losePossession(1,false);
-                $this->_logEvent($goalkeeper->getName().' saves!',null,true,true);
+                $this->_logEvent($goalkeeper->getName().' saves!',null,true,true,null,null,'save');
             }else{
-                $this->_logEvent($goalkeeper->getName().' can\'t reach the ball anymore! It hits the back of the net!',null,true,true,$this->getTeamInDefense(),$goalkeeper);
+                $this->_logEvent($goalkeeper->getName().' can\'t reach the ball anymore! It hits the back of the net!',null,true,true,$this->getTeamInDefense(),$goalkeeper,'score');
                 $this->_goal();
             }
         }else{
@@ -495,7 +503,7 @@ class Game_Model_Match
      * @param Game_Model_Team $team
      * @param Game_Model_Player $player
      */
-    private function _logEvent($message,$class=null,$showTeamPic=false,$showPlayerPic=false,$team=null,$player=null){
+    private function _logEvent($message,$class=null,$showTeamPic=false,$showPlayerPic=false,$team=null,$player=null,$action=null){
         $minuteStr = min((($this->_halftime-1)*45)+$this->_minute,$this->_halftime*45);
         if($this->_minute>45){
             $minuteStr .= ' +'.$this->_minute%45;
@@ -503,6 +511,7 @@ class Game_Model_Match
         $event = array(
             'minute' => $minuteStr,
             'message' => $message,
+            'action' => $action,
             'class' => $class,
             'ball' => $this->_ball
         );

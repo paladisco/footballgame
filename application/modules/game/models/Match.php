@@ -63,9 +63,9 @@ class Game_Model_Match
         $this->_looplog = array();
     }
 
-    public function setOffenseInstruction($instruction,$skillModifier){
+    public function setOffenseInstruction($instruction,$skillModifier=50){
         $this->_offenseInstruction = $instruction;
-        $this->_skillModifier = $skillModifier;
+        $this->_skillModifier = (int)$skillModifier;
     }
 
     public function setDefenseInstruction($instruction){
@@ -286,12 +286,12 @@ class Game_Model_Match
     }
 
 
-    private function _advanceBall($length=null,$minlength=10,$maxlenght=25){
+    private function _advanceBall($length=null,$minlength=10,$maxlength=25){
         if($this->_possession==0){
-            $this->_ball['x']+=$length?$length:rand($minlength,$maxlenght);
+            $this->_ball['x']+=$length?$length:rand($minlength,$maxlength);
             $this->_ball['y']+=rand(-50,50);
         }elseif($this->_possession==1){
-            $this->_ball['x']-=$length?$length:rand($minlength,$maxlenght);
+            $this->_ball['x']-=$length?$length:rand($minlength,$maxlength);
             $this->_ball['y']+=rand(-50,50);
         }
 
@@ -362,7 +362,7 @@ class Game_Model_Match
             $this->_logEvent($this->getPlayerInPossession()->getName().' dribbles around with the ball.',null,true,true);
             $defender = $this->getTeamInDefense()->getRandomFieldPlayer();
             $roll = rand(0,100);
-            if($defender->getSkill()>$roll){
+            if($defender->getSkill()>$roll+$this->getDistanceToGoal()/5){
                 $this->_logEvent($defender->getName().' goes in for a tackling and wins posession!',null,true,true,$this->getTeamInDefense(),$defender);
                 $this->reassignPossession($defender);
                 $this->_switchPossession();
@@ -376,9 +376,8 @@ class Game_Model_Match
             $this->_logEvent('Unbelievable! '.$this->getPlayerInPossession()->getName().' loses the ball!',null,true,true);
             $this->_losePossession(null,false);
             $this->_logEvent($this->getPlayerInPossession()->getName().' quickly takes hold of the ball!',null,true,true);
-
         }else{
-            $this->_advanceBall(15);
+            $this->_advanceBall(10,20);
             $this->_logEvent('Nice work! '.$this->getPlayerInPossession()->getName().' skillfully moves the ball forward!',null,true,true);
         }
     }
@@ -386,11 +385,12 @@ class Game_Model_Match
     private function _pass($action=null){
         if($this->getPlayerInPossession()->getPosition()==1){
             $this->_logEvent($this->getPlayerInPossession()->getName().' brings the ball back into play.',null,true,true);
+            $action = 'success';
         }else{
             $this->_logEvent($this->getPlayerInPossession()->getName().' attempts a pass.',null,true,true);
         }
         $roll=rand(0,100);
-        if($roll<=$this->getPlayerInPossession()->getSkill() || $action=='success'){
+        if($roll<=($this->getPlayerInPossession()->getSkill()/2)+($this->_skillModifier/2) || $action=='success'){
             $this->reassignPossession($this->getTeamInPossession()->getRandomFieldPlayer());
             $this->_advanceBall(null,20,30);
             $this->_logEvent($this->getPlayerInPossession()->getName().' successfully claims the pass.',null,true,true);
@@ -407,7 +407,7 @@ class Game_Model_Match
         }
         $roll=rand(0,100);
         $this->_advanceBall(rand(40,60)-abs(50-(50-$this->_ball['x'])));
-        if($roll<=50){
+        if($roll<=($this->getPlayerInPossession()->getSkill()/2)+($this->_skillModifier/2)){
             $this->reassignPossession($this->getTeamInPossession()->getRandomFieldPlayer());
             $this->_logEvent($this->getPlayerInPossession()->getName().' successfully claims the ball.',null,true,true);
         }else{
@@ -418,7 +418,7 @@ class Game_Model_Match
     private function _shoot($action=null){
         $this->_logEvent($this->getPlayerInPossession()->getName().' takes aim and shoots...','large',true,true);
         $roll=$this->getShotDifficulty();
-        if($roll<=$this->getPlayerInPossession()->getSkill() || ($action && $action!='miss')){
+        if($roll<=($this->getPlayerInPossession()->getSkill()/2)+($this->_skillModifier/2) || ($action && $action!='miss')){
             $this->_shootOnGoal($action);
         }else{
             $this->_logEvent($this->getPlayerInPossession()->getName().' completely misses the Target. What a waster!',null,true,true);

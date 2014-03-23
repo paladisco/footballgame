@@ -165,7 +165,13 @@ function loadGameAction(instruction, skill, callback) {
 
     var skillModifier = 0;
     if(typeof skill !== 'undefined'){
-        skillModifier = (parseInt($('#skillContainer').find('.gauge').css('width')) / parseInt($('#skillContainer').find('.gauge').parent().css('width'))) * 100;
+        var pct = (parseInt($('#skillContainer').find('.gauge').css('width')) / parseInt($('#skillContainer').find('.gauge').parent().css('width')))*100;
+        if(skill=='power'){
+            skillModifier = pct;
+        }else{
+            skillModifier = (50-Math.abs(50-pct))*2;
+            console.log(skillModifier);
+        }
         $('#skillContainer').html('');
     }
 

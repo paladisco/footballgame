@@ -17,3 +17,4 @@ Todos
 * Implement Facebook Sharing integration
 * Better Graphics
 * Implement Grunt for SASS integration
+* Maybe move to a different Framework with less overhead (Laravel)

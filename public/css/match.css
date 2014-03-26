@@ -10,10 +10,10 @@
 .log .row .alert{
     padding: 5px;
 }
-.log .row .col-lg-6{
+.log .row .col-lg-6,.summary .row .col-lg-6{
     text-align: right;
 }
-.log .row .col-push-6{
+.log .row .col-lg-offset-6,.summary .row .col-lg-offset-6{
     text-align: left;
 }
 .log .row .info{
@@ -51,7 +51,7 @@
 .log .row .col-lg-6 .element{
     float: right;
 }
-.log .row .col-push-6 .element{
+.log .row .col-lg-offset-6 .element{
     float: left;
 }
 .log .row .info .element{

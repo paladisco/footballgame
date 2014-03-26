@@ -1,46 +1,41 @@
 <div class="row" id="match">
-    <div class="col-lg-8">
-        <a class="pull-right btn btn-danger btn-small" id="actionButton" href="<?php echo $this->url(array('reset'=>1)); ?>">
-            <i class="icon-refresh"></i> Reset Match
-        </a>
-        <div class="controls" id="matchControls">
-            <?php echo $this->partial('match/_controls.phtml',array('situation'=>$this->situation)); ?>
-        </div>
-        <div id="skillContainer">
+    <div class="col-lg-6">
+        <div class="row">
+            <a class="pull-right btn btn-danger btn-small" id="actionButton" href="<?php echo $this->url(array('reset'=>1)); ?>">
+                <i class="icon-refresh"></i> Reset Match
+            </a>
+            <div class="col-lg-6">
+                <div class="controls" id="matchControls">
+                    <?php echo $this->partial('match/_controls.phtml',array('situation'=>$this->situation)); ?>
+                </div>
+                <div id="skillContainer">
 
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading"><h3 class="panel-title">Match Log</h3></div>
-            <div id="matchLog" class="panel-body">
-                <?php echo $this->partial('match/_log.phtml',array('log'=>$this->log)); ?>
+                </div>
             </div>
+            <div class="col-lg-6">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <h4 style="text-align: right;"><span class="label label-success"><?php echo $this->homeTeam->getName(); ?></span></h4>
+            </div>
+            <div class="col-lg-6">
+                <h4><span class="label label-danger"><?php echo $this->awayTeam->getName(); ?></span></h4>
+            </div>
+            <div id="summary">
+                <?php echo $this->partial('match/_summary.phtml',array('summary'=>$this->summary)); ?>
+            </div>
+        </div>
+        <div id="matchLog">
+            <?php echo $this->partial('match/_log.phtml',array('log'=>$this->log)); ?>
         </div>
     </div>
-    <div class="col-lg-4">
-        <div class="panel panel-success">
-            <div class="panel-heading"><h3 class="panel-title">Pitch Situation</h3></div>
-            <div id="pitch" class="panel-body">
-                <?php $pitch = $this->pitch; ?>
-                <div class="pitch">
-                    <?php echo $this->partial('match/_pitch.phtml',array('pitch'=>$this->pitch)); ?>
-                </div>
-            </div>
+    <div class="col-lg-6">
+        <?php $pitch = $this->pitch; ?>
+        <div id="pitch" class="pitch">
+            <?php echo $this->partial('match/_pitch.phtml',array('pitch'=>$this->pitch)); ?>
         </div>
-        <div class="panel panel-primary">
-            <div class="panel-heading"><h3 class="panel-title">Match Summary</h3></div>
-            <div class="row panel-body">
-                <div class="col-lg-6">
-                    <h4 style="text-align: right;"><span class="label label-success"><?php echo $this->homeTeam->getName(); ?></span></h4>
-                </div>
-                <div class="col-lg-6">
-                    <h4><span class="label label-danger"><?php echo $this->awayTeam->getName(); ?></span></h4>
-                </div>
-                <div id="summary">
-                    <?php echo $this->partial('match/_summary.phtml',array('summary'=>$this->summary)); ?>
-                </div>
-            </div>
-        </div>
-
     </div>
 </div>
 
@@ -106,12 +101,12 @@ function initSkillModifier(instruction, skill, callback) {
     $(progressBar).css('width','50%');
 
     var hitButton = document.createElement('a');
-    $(hitButton).addClass('btn hit btn-primary');
+    $(hitButton).addClass('btn hit btn-primary pull-left');
     $(hitButton).html('Hit it!');
 
     $(progressBar).appendTo($(progress));
-    $(progress).appendTo($('#skillContainer'));
     $(hitButton).appendTo($('#skillContainer'));
+    $(progress).appendTo($('#skillContainer'));
 
     animateGauge($(progressBar),skill);
     var gaugeInterval = setInterval(function () {
@@ -128,7 +123,7 @@ function initSkillModifier(instruction, skill, callback) {
 function loadEvent(data,i) {
     if (data.html[++i]) {
         $('#matchLog .log').prepend(data.html[i]);
-        $('#matchLog .log .row:first').slideDown(500, function () {
+        $('#matchLog .log .row:first').slideDown(300, function () {
 
             $('.pitch .ball').animate({
                 'left': data.log[i].ball.x + '%',
@@ -150,10 +145,9 @@ function loadEvent(data,i) {
                 $('#pitch .player').html(img);
             }
 
-            console.log('Recursively looking for next!');
             setTimeout(function(){
                 loadEvent(data,i);
-            }, 1500);
+            }, 500);
         });
     } else {
         $('#matchControls').html(data.controls);

@@ -274,13 +274,18 @@ class Game_Model_Match
 
     private function _randomOffenseInstruction(){
         $roll = rand(0,100);
-        if($this->getDistanceToGoal()<50 && $roll>$this->getDistanceToGoal())
+        $distance = $this->getDistanceToGoal();
+        if($distance<40 && $roll>$distance*2)
         {
             $this->_offenseInstruction = 'shoot';
         }
-        elseif($roll>70){
-            $this->_offenseInstruction = 'pass';
-        }elseif($roll>40){
+        elseif($roll>40){
+            if($roll>70 && $distance>60){
+                $this->_offenseInstruction = 'clear';
+            }else{
+                $this->_offenseInstruction = 'pass';
+            }
+        }elseif($roll<=40){
             $this->_offenseInstruction = 'dribble';
         }
     }
@@ -359,11 +364,11 @@ class Game_Model_Match
     // Attacker's Actions
     private function _dribble(){
         if($this->getPlayerInPossession()->getPosition()!=1){
-            $this->_logEvent($this->getPlayerInPossession()->getName().' dribbles around with the ball.',null,true,true);
+            $message = $this->getPlayerInPossession()->getName().' dribbles around with the ball';
             $defender = $this->getTeamInDefense()->getRandomFieldPlayer();
             $roll = rand(0,100);
             if($defender->getSkill()>$roll+$this->getDistanceToGoal()/5){
-                $this->_logEvent($defender->getName().' goes in for a tackling and wins posession!',null,true,true,$this->getTeamInDefense(),$defender);
+                $this->_logEvent($message. ', as '.$defender->getName().' goes in for a tackling and wins posession!',null,true,true,$this->getTeamInDefense(),$defender);
                 $this->reassignPossession($defender);
                 $this->_switchPossession();
                 return;
@@ -373,12 +378,12 @@ class Game_Model_Match
         }
         $roll=rand(0,100);
         if($roll<=$this->getPlayerInPossession()->getSkill()/3){
-            $this->_logEvent('Unbelievable! '.$this->getPlayerInPossession()->getName().' loses the ball!',null,true,true);
+            $message .= ', but loses the ball!';
             $this->_losePossession(null,false);
-            $this->_logEvent($this->getPlayerInPossession()->getName().' quickly takes hold of the ball!',null,true,true);
+            $this->_logEvent($message . $this->getPlayerInPossession()->getName().' quickly takes hold of the ball!',null,true,true);
         }else{
             $this->_advanceBall(10,20);
-            $this->_logEvent('Nice work! '.$this->getPlayerInPossession()->getName().' skillfully moves the ball forward!',null,true,true);
+            $this->_logEvent($message . ' and skillfully moves the ball forward!',null,true,true);
         }
     }
 
@@ -387,13 +392,13 @@ class Game_Model_Match
             $this->_logEvent($this->getPlayerInPossession()->getName().' brings the ball back into play.',null,true,true);
             $action = 'success';
         }else{
-            $this->_logEvent($this->getPlayerInPossession()->getName().' attempts a pass.',null,true,true);
+            $message = $this->getPlayerInPossession()->getName().' passes the ball';
         }
         $roll=rand(0,100);
         if($roll<=($this->getPlayerInPossession()->getSkill()/2)+($this->_skillModifier/2) || $action=='success'){
             $this->reassignPossession($this->getTeamInPossession()->getRandomFieldPlayer());
             $this->_advanceBall(null,20,30);
-            $this->_logEvent($this->getPlayerInPossession()->getName().' successfully claims the pass.',null,true,true);
+            $this->_logEvent($message . ' to ' . $this->getPlayerInPossession()->getName().', who successfully claims the ball.',null,true,true);
         }else{
             $this->_losePossession();
         }
@@ -401,22 +406,22 @@ class Game_Model_Match
 
     private function _clear(){
         if($this->getPlayerInPossession()->getPosition()==1){
-            $this->_logEvent($this->getPlayerInPossession()->getName().' kicks the ball far up field into play.',null,true,true);
+            $message = $this->getPlayerInPossession()->getName().' kicks the ball far up field';
         }else{
-            $this->_logEvent($this->getPlayerInPossession()->getName().' clears the ball.',null,true,true);
+            $message = $this->getPlayerInPossession()->getName().' clears the ball wide up field';
         }
         $roll=rand(0,100);
         $this->_advanceBall(rand(40,60)-abs(50-(50-$this->_ball['x'])));
         if($roll<=($this->getPlayerInPossession()->getSkill()/2)+($this->_skillModifier/2)){
             $this->reassignPossession($this->getTeamInPossession()->getRandomFieldPlayer());
-            $this->_logEvent($this->getPlayerInPossession()->getName().' successfully claims the ball.',null,true,true);
+            $this->_logEvent($message . ' where ' . $this->getPlayerInPossession()->getName().' successfully claims the ball.',null,true,true);
         }else{
             $this->_losePossession();
         }
     }
 
     private function _shoot($action=null){
-        $this->_logEvent($this->getPlayerInPossession()->getName().' takes aim and shoots...','large',true,true);
+        $this->_logEvent($this->getPlayerInPossession()->getName().' takes aim and shoots...',null,true,true);
         $roll=$this->getShotDifficulty();
         if($roll<=($this->getPlayerInPossession()->getSkill()/2)+($this->_skillModifier/2) || ($action && $action!='miss')){
             $this->_shootOnGoal($action);
@@ -467,7 +472,7 @@ class Game_Model_Match
 
     private function _losePossession($toPosition=null,$commented=true){
         if($commented){
-            $this->_logEvent($this->getPlayerInPossession()->getName().' loses possession.',null,true,true);
+            $message = $this->getPlayerInPossession()->getName().' loses possession, ';
         }
         $this->_switchPossession();
         if($player = $this->getTeamInPossession()->getPlayerByPosition($toPosition)){
@@ -476,7 +481,7 @@ class Game_Model_Match
             $this->reassignPossession($this->getTeamInPossession()->getRandomFieldPlayer());
         }
         if($commented){
-            $this->_logEvent($this->getPlayerInPossession()->getName().' has got the ball now.',null,true,true);
+            $this->_logEvent($message . $this->getPlayerInPossession()->getName().' has got the ball now.',null,true,true);
         }
     }
 
@@ -484,7 +489,7 @@ class Game_Model_Match
         $this->_flip = rand(0,1);
         $this->_possession = $this->_flip;
         $this->_switchPossession();
-        $this->_logEvent($this->getTeam($this->_flip)->getName().' wins the Coin Toss!',null,true);
+        $this->_logEvent($this->getTeam($this->_possession)->getName().' wins the Coin Toss!',null,true);
         $this->_kickOff();
     }
 

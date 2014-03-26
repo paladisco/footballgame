@@ -15,6 +15,10 @@
     border-right: 5px solid #F00;
 }
 
+#skillContainer .progress{
+    margin-left: 90px;
+    height: 30px;
+}
 
 #skillgame .background{
     background-image: url(images/penalty.jpg);

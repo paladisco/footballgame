@@ -14,7 +14,9 @@ public/images/uploaded/*
 backup*
 node_modules/
 public/scripts/
+public/fonts/
 public/styles/
+public/.htaccess
 public/*.html
 public/images/*
 public/bower_components/

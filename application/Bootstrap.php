@@ -89,7 +89,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $layoutModulePlugin = new RF_Controller_LayoutPlugin();
 
         $layoutModulePlugin->registerModuleLayout("default",APPLICATION_PATH."/modules/default/views/scripts","layout");
-        $layoutModulePlugin->registerModuleLayout("game",APPLICATION_PATH."/modules/game/views/scripts","layout");
 
         $front->registerPlugin($layoutModulePlugin);
     }

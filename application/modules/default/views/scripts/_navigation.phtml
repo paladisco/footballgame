@@ -1,0 +1,30 @@
+<div class="navbar navbar-inverse navbar-fixed-top bs-docs-nav">
+    <div class="container">
+        <a href="<?php echo HTTP_ROOT ?>/game" class="navbar-brand"><?php echo SITE_NAME; ?></a>
+        <ul class="nav navbar-nav">
+            <?php
+            if ($this->facebook_user_id){
+                $partial = array('frontmenu.phtml', 'default');
+                echo $this->navigation(Zend_Registry::get('navigation'))->menu()->setPartial($partial)->render();
+                ?>
+                <li><a href="<?php echo $this->logoutUrl ?>"><i class="icon-off"></i> Logout</a></li>
+            <?php }else{
+                ?><li><a href="<?php echo $this->loginUrl ?>"><i class="icon-facebook-sign"></i> Login with Facebook</a></li><?
+            }
+            ?>
+        </ul>
+        <?php if($this->identity){ ?>
+            <div class="logout"><a class="btn btn-danger" href="<?php echo $this->url(array
+                ('module'=>'login','controller'=>'login','action'=>'logout'),'default',true); ?>">Logout</a>
+            </div>
+            <div class="avatar">
+                <?php echo $this->user()->renderProfilePic($this->identity->getID()); ?>
+            </div>
+            <div class="loginInfo">
+                <strong>Logged in as</strong><br />
+                <?php echo $this->identity->getRealname(); ?>
+
+            </div>
+        <?php } ?>
+    </div>
+</div>

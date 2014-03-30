@@ -1,0 +1,12 @@
+{
+  "name": "paladisco/fbgame",
+  "version": "0.1",
+  "private": true,
+  "dependencies": {
+    "sass-bootstrap": "~3.0.0",
+    "modernizr": "~2.6.2",
+    "jquery": "~1.10.2",
+    "components-font-awesome": "~4.0.3",
+    "flat-ui-official": "~2.1.3"
+  }
+}

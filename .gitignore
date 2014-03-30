@@ -1,9 +1,23 @@
 application/configs/environment.ini
+application/modules/frontend/views/scripts/layout.phtml
+
+app/bower_components/
+
+.tmp/
 error_log
 logs
 cache/*
+cache/images/*
+cache/pages/*
+data/*
 public/images/uploaded/*
 backup*
+node_modules/
+public/scripts/
+public/styles/
+public/*.html
+public/images/*
+public/bower_components/
 
 # Numerous always-ignore extensions
 *.diff
@@ -16,6 +30,9 @@ backup*
 *.vi
 *~
 *.sass-cache
+
+node_modules/*
+temp/*
 
 # OS or Editor folders
 .DS_Store

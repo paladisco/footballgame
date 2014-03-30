@@ -378,7 +378,7 @@ module.exports = function (grunt) {
 
         replace: {
           dist: {
-            src: ['<%= yeoman.zend_app %>/modules/frontend/views/scripts/layout.phtml'],
+            src: ['<%= yeoman.zend_app %>/modules/default/views/scripts/layout.phtml'],
             overwrite: true,// overwrite matched source files
             replacements: [{ 
               from: /include "include\/(.*?).html"/g,

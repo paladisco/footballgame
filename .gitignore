@@ -1,5 +1,5 @@
 application/configs/environment.ini
-application/modules/frontend/views/scripts/layout.phtml
+application/modules/default/views/scripts/layout.phtml
 
 app/bower_components/
 

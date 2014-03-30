@@ -9,7 +9,7 @@
                 <div class="picture"><img class="thumbnail" src="http://graph.facebook.com/<?php echo $f['fb_uid']; ?>/picture"></div>
                 <div class="description"><?php echo $f['fb_name']; ?></div>
                 <a class="btn btn-default" href="<?php echo $this->url(array('controller'=>'match','action'=>'index','away_team_id'=>$f['id'])); ?>">
-                    <i class="icon-circle-arrow-right"></i> Challenge <?php echo $f['fb_name']; ?>
+                    <i class="fa fa-circle-arrow-right"></i> Challenge <?php echo $f['fb_name']; ?>
                 </a>
             </div>
         <?php } ?>

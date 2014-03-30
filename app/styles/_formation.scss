@@ -1,0 +1,53 @@
+#formation .pitch{
+    width: 539px;
+    height: 750px;
+    background-image: url(images/pitch.png);
+}
+#formation .pitch .formation{
+    padding: 50px;
+}
+#formation .pitch .line{
+    height: 165px;
+    padding: 20px 0;
+    text-align: center;
+}
+#formation .pitch .player{
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+    width: 93px;
+    height: 145px;
+    padding: 5px;
+    margin: 0 3px;
+    display:-moz-inline-stack;
+    display:inline-block;
+    zoom:1;
+    *display:inline;
+    background-color: rgba(100,200,100,0.5);
+    vertical-align: top;
+}
+#formation .pitch .player .picture{
+    width: 60px;
+    margin: 0 auto;
+}
+#formation .pitch .player .name{
+    display: none;
+}
+#formation .pitch .hovered{
+    background-color: rgba(255,100,100,0.5);
+}
+#formation .pitch .player .stats h5,#formation .pitch .player .stats label{
+    display: none;
+}
+#formation .pitch .player .stats h5,#formation .pitch .player .stats{
+    padding-top: 6px;
+}
+#formation .pitch .player .stats h5,#formation .pitch .player .stats i{
+    margin-right: 5px;
+}
+#formation .pitch .player .stats h5,#formation .pitch .player .stats .progress{
+    height: 13px;
+    margin-bottom: 6px;
+    border: 1px solid rgba(0,0,0,0.8);
+}

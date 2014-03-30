@@ -5,12 +5,12 @@
             data-title="<?php echo $p['name']; ?>" data-placement="auto">
             <div class="picture"><img class="thumbnail" src="http://graph.facebook.com/<?php echo $p['fb_uid']; ?>/picture"></div>
             <div class="description">
-                <?php if($p['injured']){ ?><i class="icon-medkit" style="color: #C00;"></i><?php } ?>
+                <?php if($p['injured']){ ?><i class="fa fa-medkit" style="color: #C00;"></i><?php } ?>
             </div>
             <?php if($this->deletable){ ?>
-                <a class="btn btn-danger"><i class="icon-thumbs-down"></i></a>
+                <a class="btn btn-danger"><i class="fa fa-thumbs-down"></i></a>
             <?php } ?>
-            <?php if($p['injured']){ ?><a class="btn btn-success heal"><i class="icon-medkit"></i></a><?php } ?>
+            <?php if($p['injured']){ ?><a class="btn btn-success heal"><i class="fa fa-medkit"></i></a><?php } ?>
         </div>
     <?php } ?>
 </div>

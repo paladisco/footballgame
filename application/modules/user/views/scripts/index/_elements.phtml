@@ -18,7 +18,7 @@
 		<tr>
             <td class="vmiddle">
                 <a class="btn" href="<?php echo $this->url(array('action'=>'edit', 'id'=>$r->id)); ?>">
-                    <i class="icon-edit"></i>
+                    <i class="fa fa-edit"></i>
                 </a>
             </td>
             <td class="vmiddle"><?php echo $this->user()->renderProfilePic($r->id); ?>
@@ -29,9 +29,9 @@
 			<td class="vmiddle">
                 <a href="<?php echo $this->url(array('action'=>'activate', 'id'=>$r->id)); ?>">
                     <?php if($r->active==0){ ?>
-                        <i class="icon-unlock"></i> aktivieren
+                        <i class="fa fa-unlock"></i> aktivieren
                     <?php }else{ ?>
-                        <i class="icon-lock"></i> sperren
+                        <i class="fa fa-lock"></i> sperren
                     <?php } ?>
                 </a>
             </td>

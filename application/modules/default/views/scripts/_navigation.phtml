@@ -7,9 +7,9 @@
                 $partial = array('frontmenu.phtml', 'default');
                 echo $this->navigation(Zend_Registry::get('navigation'))->menu()->setPartial($partial)->render();
                 ?>
-                <li><a href="<?php echo $this->logoutUrl ?>"><i class="icon-off"></i> Logout</a></li>
+                <li><a href="<?php echo $this->logoutUrl ?>"><i class="fa fa-off"></i> Logout</a></li>
             <?php }else{
-                ?><li><a href="<?php echo $this->loginUrl ?>"><i class="icon-facebook-sign"></i> Login with Facebook</a></li><?
+                ?><li><a href="<?php echo $this->loginUrl ?>"><i class="fa fa-facebook-sign"></i> Login with Facebook</a></li><?
             }
             ?>
         </ul>

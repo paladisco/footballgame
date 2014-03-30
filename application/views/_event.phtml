@@ -22,7 +22,7 @@
             foreach($stats as $id => $stat){
                 if($stat['points']!=$before['stats'][$type][$id]['points']){ ?>
                     <div>
-                        <i class="icon-<?php echo strtolower($stat['name']); ?>"></i>
+                        <i class="fa fa-<?php echo strtolower($stat['name']); ?>"></i>
                         <label><?php echo $stat['name']; ?></label>
                         <div class="progress">
                             <div data-percentage="<?php echo $stat['points'] ?>"

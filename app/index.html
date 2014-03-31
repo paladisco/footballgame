@@ -15,7 +15,6 @@
     <!-- build:css /styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/sass-bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css" />
     <!-- endbower -->
     <link rel="stylesheet" href="bower_components/flat-ui-official/css/flat-ui.css" />
     <!-- endbuild -->
@@ -29,11 +28,10 @@
     <!-- build:js /scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/jquery.js"></script>
-    <script src="bower_components/jquery.ui/ui/jquery.ui.core.js"></script>
-    <script src="bower_components/jquery.ui/ui/jquery.ui.draggable.js"></script>
-    <script src="bower_components/jquery.ui/ui/jquery.ui.droppable.js"></script>
+    <script src="bower_components/jquery-ui/ui/jquery-ui.js"></script>
     <script src="bower_components/sass-bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/typeahead.js/dist/typeahead.bundle.js"></script>
+    <script src="scripts/vendor/jquery.path.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 </head>
@@ -51,7 +49,1016 @@
 
             <!-- zend:layout content -->
             <!-- build:remove -->
+            <div class="row">
+            <div class="col-lg-7" id="formation">
+            <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Formation</h3>
+            </div>
+            <div class="panel-body">
+            <div class="pitch" id="pitch">
+            <div class="formation">
+            <div class="offense line">
+                <div class="player position" data-id="10" data-position="11">
+                    <div class="picture">
+                        <img class="thumbnail" src="http://graph.facebook.com/828934527/picture">    </div>
+                    <div class="name">Jeannette Hélène Paladino-Aerne</div>
+                    <div class="stats">
+                        <h5>primary</h5>
+                        <div>
+                            <i class="fa fa-skills"></i>
+                            <label>Skills</label>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-success" style="width: 81%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <i class="fa fa-charisma"></i>
+                            <label>Charisma</label>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-danger" style="width: 12%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <i class="fa fa-popularity"></i>
+                            <label>Popularity</label>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-warning" style="width: 43%;"></div>
+                            </div>
+                        </div>
+                        <h5>fitness</h5>
+                        <div>
+                            <i class="fa fa-fitness"></i>
+                            <label>Fitness</label>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-success" style="width: 92%;"></div>
+                            </div>
+                        </div>
+                    </div></div>            <div class="player position" data-id="9" data-position="10">
+                <div class="picture">
+                    <img class="thumbnail" src="http://graph.facebook.com/596467949/picture">    </div>
+                <div class="name">Pino Quaresima</div>
+                <div class="stats">
+                    <h5>primary</h5>
+                    <div>
+                        <i class="fa fa-skills"></i>
+                        <label>Skills</label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-warning" style="width: 40%;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <i class="fa fa-charisma"></i>
+                        <label>Charisma</label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-warning" style="width: 41%;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <i class="fa fa-popularity"></i>
+                        <label>Popularity</label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-warning" style="width: 37%;"></div>
+                        </div>
+                    </div>
+                    <h5>fitness</h5>
+                    <div>
+                        <i class="fa fa-fitness"></i>
+                        <label>Fitness</label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-danger" style="width: -4%;"></div>
+                        </div>
+                    </div>
+                </div></div>        </div>
+            <div class="midfield line">
+                <div class="player position" data-id="24" data-position="9">
+                    <div class="picture">
+                        <img class="thumbnail" src="http://graph.facebook.com/1013454549/picture">    </div>
+                    <div class="name">Res Hefti</div>
+                    <div class="stats">
+                        <h5>primary</h5>
+                        <div>
+                            <i class="fa fa-skills"></i>
+                            <label>Skills</label>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-danger" style="width: 24%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <i class="fa fa-charisma"></i>
+                            <label>Charisma</label>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-danger" style="width: 21%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <i class="fa fa-popularity"></i>
+                            <label>Popularity</label>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-success" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        <h5>fitness</h5>
+                        <div>
+                            <i class="fa fa-fitness"></i>
+                            <label>Fitness</label>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-success" style="width: 95%;"></div>
+                            </div>
+                        </div>
+                    </div></div>            <div class="player position" data-id="1" data-position="8">
+                <div class="picture">
+                    <img class="thumbnail" src="http://graph.facebook.com/517233293/picture">    </div>
+                <div class="name">Stephan Groth</div>
+                <div class="stats">
+                    <h5>primary</h5>
+                    <div>
+                        <i class="fa fa-skills"></i>
+                        <label>Skills</label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success" style="width: 87%;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <i class="fa fa-charisma"></i>
+                        <label>Charisma</label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-warning" style="width: 30%;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <i class="fa fa-popularity"></i>
+                        <label>Popularity</label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-danger" style="width: -6%;"></div>
+                        </div>
+                    </div>
+                    <h5>fitness</h5>
+                    <div>
+                        <i class="fa fa-fitness"></i>
+                        <label>Fitness</label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-warning" style="width: 62%;"></div>
+                        </div>
+                    </div>
+                </div></div>            <div class="player position" data-id="8" data-position="7">
+                <div class="picture">
+                    <img class="thumbnail" src="http://graph.facebook.com/524237871/picture">    </div>
+                <div class="name">Dennis Busch</div>
+                <div class="stats">
+                    <h5>primary</h5>
+                    <div>
+                        <i class="fa fa-skills"></i>
+                        <label>Skills</label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-warning" style="width: 49%;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <i class="fa fa-charisma"></i>
+                        <label>Charisma</label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success" style="width: 71%;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <i class="fa fa-popularity"></i>
+                        <label>Popularity</label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-danger" style="width: 10%;"></div>
+                        </div>
+                    </div>
+                    <h5>fitness</h5>
+                    <div>
+                        <i class="fa fa-fitness"></i>
+                        <label>Fitness</label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-warning" style="width: 60%;"></div>
+                        </div>
+                    </div>
+                </div></div>            <div class="player position" data-id="6" data-position="6">
+                <div class="picture">
+                    <img class="thumbnail" src="http://graph.facebook.com/527649474/picture">    </div>
+                <div class="name">Rimini W. Frosch</div>
+                <div class="stats">
+                    <h5>primary</h5>
+                    <div>
+                        <i class="fa fa-skills"></i>
+                        <label>Skills</label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-danger" style="width: 15%;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <i class="fa fa-charisma"></i>
+                        <label>Charisma</label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-danger" style="width: 20%;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <i class="fa fa-popularity"></i>
+                        <label>Popularity</label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success" style="width: 95%;"></div>
+                        </div>
+                    </div>
+                    <h5>fitness</h5>
+                    <div>
+                        <i class="fa fa-fitness"></i>
+                        <label>Fitness</label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success" style="width: 91%;"></div>
+                        </div>
+                    </div>
+                </div></div>        </div>
+            <div class="defense line">
+                <div class="player position" data-id="7" data-position="5">
+                    <div class="picture">
+                        <img class="thumbnail" src="http://graph.facebook.com/728629017/picture">    </div>
+                    <div class="name">Robert Drakogiannakis</div>
+                    <div class="stats">
+                        <h5>primary</h5>
+                        <div>
+                            <i class="fa fa-skills"></i>
+                            <label>Skills</label>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-success" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <i class="fa fa-charisma"></i>
+                            <label>Charisma</label>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-danger" style="width: 13%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <i class="fa fa-popularity"></i>
+                            <label>Popularity</label>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-danger" style="width: 28%;"></div>
+                            </div>
+                        </div>
+                        <h5>fitness</h5>
+                        <div>
+                            <i class="fa fa-fitness"></i>
+                            <label>Fitness</label>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-warning" style="width: 58%;"></div>
+                            </div>
+                        </div>
+                    </div></div>            <div class="player position" data-id="23" data-position="4">
+                <div class="picture">
+                    <img class="thumbnail" src="http://graph.facebook.com/573679960/picture">    </div>
+                <div class="name">Noemi Scheps</div>
+                <div class="stats">
+                    <h5>primary</h5>
+                    <div>
+                        <i class="fa fa-skills"></i>
+                        <label>Skills</label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-danger" style="width: 27%;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <i class="fa fa-charisma"></i>
+                        <label>Charisma</label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-danger" style="width: 13%;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <i class="fa fa-popularity"></i>
+                        <label>Popularity</label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success" style="width: 84%;"></div>
+                        </div>
+                    </div>
+                    <h5>fitness</h5>
+                    <div>
+                        <i class="fa fa-fitness"></i>
+                        <label>Fitness</label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success" style="width: 84%;"></div>
+                        </div>
+                    </div>
+                </div></div>            <div class="player position" data-id="22" data-position="3">
+                <div class="picture">
+                    <img class="thumbnail" src="http://graph.facebook.com/643953604/picture">    </div>
+                <div class="name">Petar Arapovic</div>
+                <div class="stats">
+                    <h5>primary</h5>
+                    <div>
+                        <i class="fa fa-skills"></i>
+                        <label>Skills</label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-warning" style="width: 49%;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <i class="fa fa-charisma"></i>
+                        <label>Charisma</label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-danger" style="width: 29%;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <i class="fa fa-popularity"></i>
+                        <label>Popularity</label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-warning" style="width: 52%;"></div>
+                        </div>
+                    </div>
+                    <h5>fitness</h5>
+                    <div>
+                        <i class="fa fa-fitness"></i>
+                        <label>Fitness</label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success" style="width: 95%;"></div>
+                        </div>
+                    </div>
+                </div></div>            <div class="player position" data-id="25" data-position="2">
+                <div class="picture">
+                    <img class="thumbnail" src="http://graph.facebook.com/528947017/picture">    </div>
+                <div class="name">Michael Rousseau</div>
+                <div class="stats">
+                    <h5>primary</h5>
+                    <div>
+                        <i class="fa fa-skills"></i>
+                        <label>Skills</label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success" style="width: 82%;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <i class="fa fa-charisma"></i>
+                        <label>Charisma</label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-warning" style="width: 38%;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <i class="fa fa-popularity"></i>
+                        <label>Popularity</label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-danger" style="width: 10%;"></div>
+                        </div>
+                    </div>
+                    <h5>fitness</h5>
+                    <div>
+                        <i class="fa fa-fitness"></i>
+                        <label>Fitness</label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success" style="width: 96%;"></div>
+                        </div>
+                    </div>
+                </div></div>        </div>
+            <div class="goalkeeper line">
+                <div class="player position" data-id="21" data-position="1">
+                    <div class="picture">
+                        <img class="thumbnail" src="http://graph.facebook.com/549970588/picture">    </div>
+                    <div class="name">Don Promillo</div>
+                    <div class="stats">
+                        <h5>primary</h5>
+                        <div>
+                            <i class="fa fa-skills"></i>
+                            <label>Skills</label>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-success" style="width: 89%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <i class="fa fa-charisma"></i>
+                            <label>Charisma</label>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-danger" style="width: 21%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <i class="fa fa-popularity"></i>
+                            <label>Popularity</label>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-danger" style="width: 20%;"></div>
+                            </div>
+                        </div>
+                        <h5>fitness</h5>
+                        <div>
+                            <i class="fa fa-fitness"></i>
+                            <label>Fitness</label>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-success" style="width: 94%;"></div>
+                            </div>
+                        </div>
+                    </div></div>        </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            <div class="col-lg-5">
+            <div class="panel panel-info clearfix">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Controls</h3>
+                </div>
+                <div class="panel-body">
+                    <p>Hier kannst du verschiedene Random Events auslösen. Das ist sehr experimentiell und auf eigene Gefahr auszutesten! Deine Spieler könnten dabei zu schaden kommen!</p>
+                    <a class="btn btn-success random"><i class="fa fa-random"></i> Random Event</a>
+                </div>
+            </div>
+            <div class="panel panel-default clearfix">
+            <div class="panel-heading">
+                <a href="/game/team" class="btn btn-primary btn-small pull-right">
+                    <i class="fa fa-plus-sign"></i> Add Friends to Team!</a>
+                <h3 class="panel-title">Roster</h3>
+            </div>
+            <div class="panel-body">
+            <p>Das ist dein aktuelles Kader. Fahre mit der Maus über die Spieler um mehr Infos zu erhalten. Sei ein Taktikfuchs und ziehe die Spieler mit gedrückter Maustaste in die Formation herüber. Support für Mobiltelefone folgt zu einem späteren Zeitpunkt!</p>
+            <div id="roster" class="clearfix">
+            <div class="clearfix player" data-id="1"
+                 data-html="true" data-content='<div class="stats">
+            <h5>primary</h5>
+                    <div>
+                <i class="fa fa-skills"></i>
+                <label>Skills</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 87%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-charisma"></i>
+                <label>Charisma</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" style="width: 30%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-popularity"></i>
+                <label>Popularity</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" style="width: -6%;"></div>
+                </div>
+            </div>
+                    <h5>fitness</h5>
+                    <div>
+                <i class="fa fa-fitness"></i>
+                <label>Fitness</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" style="width: 62%;"></div>
+                </div>
+            </div>
+            </div>'
+                 data-title="Stephan Groth" data-placement="auto">
+                <div class="picture"><img class="thumbnail" src="http://graph.facebook.com/517233293/picture"></div>
+                <div class="description">
+                </div>
+            </div>
+            <div class="clearfix player" data-id="2"
+                 data-html="true" data-content='<div class="stats">
+            <h5>primary</h5>
+                    <div>
+                <i class="fa fa-skills"></i>
+                <label>Skills</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" style="width: 35%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-charisma"></i>
+                <label>Charisma</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" style="width: 51%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-popularity"></i>
+                <label>Popularity</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" style="width: 44%;"></div>
+                </div>
+            </div>
+                    <h5>fitness</h5>
+                    <div>
+                <i class="fa fa-fitness"></i>
+                <label>Fitness</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 97%;"></div>
+                </div>
+            </div>
+            </div>'
+                 data-title="Rahel Pfiffner" data-placement="auto">
+                <div class="picture"><img class="thumbnail" src="http://graph.facebook.com/646886405/picture"></div>
+                <div class="description">
+                </div>
+            </div>
+            <div class="clearfix player" data-id="6"
+                 data-html="true" data-content='<div class="stats">
+            <h5>primary</h5>
+                    <div>
+                <i class="fa fa-skills"></i>
+                <label>Skills</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" style="width: 15%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-charisma"></i>
+                <label>Charisma</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" style="width: 20%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-popularity"></i>
+                <label>Popularity</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 95%;"></div>
+                </div>
+            </div>
+                    <h5>fitness</h5>
+                    <div>
+                <i class="fa fa-fitness"></i>
+                <label>Fitness</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 91%;"></div>
+                </div>
+            </div>
+            </div>'
+                 data-title="Rimini W. Frosch" data-placement="auto">
+                <div class="picture"><img class="thumbnail" src="http://graph.facebook.com/527649474/picture"></div>
+                <div class="description">
+                </div>
+            </div>
+            <div class="clearfix player" data-id="7"
+                 data-html="true" data-content='<div class="stats">
+            <h5>primary</h5>
+                    <div>
+                <i class="fa fa-skills"></i>
+                <label>Skills</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 85%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-charisma"></i>
+                <label>Charisma</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" style="width: 13%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-popularity"></i>
+                <label>Popularity</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" style="width: 28%;"></div>
+                </div>
+            </div>
+                    <h5>fitness</h5>
+                    <div>
+                <i class="fa fa-fitness"></i>
+                <label>Fitness</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" style="width: 58%;"></div>
+                </div>
+            </div>
+            </div>'
+                 data-title="Robert Drakogiannakis" data-placement="auto">
+                <div class="picture"><img class="thumbnail" src="http://graph.facebook.com/728629017/picture"></div>
+                <div class="description">
+                </div>
+            </div>
+            <div class="clearfix player" data-id="8"
+                 data-html="true" data-content='<div class="stats">
+            <h5>primary</h5>
+                    <div>
+                <i class="fa fa-skills"></i>
+                <label>Skills</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" style="width: 49%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-charisma"></i>
+                <label>Charisma</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 71%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-popularity"></i>
+                <label>Popularity</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" style="width: 10%;"></div>
+                </div>
+            </div>
+                    <h5>fitness</h5>
+                    <div>
+                <i class="fa fa-fitness"></i>
+                <label>Fitness</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" style="width: 60%;"></div>
+                </div>
+            </div>
+            </div>'
+                 data-title="Dennis Busch" data-placement="auto">
+                <div class="picture"><img class="thumbnail" src="http://graph.facebook.com/524237871/picture"></div>
+                <div class="description">
+                </div>
+            </div>
+            <div class="clearfix player injured" data-id="9"
+                 data-html="true" data-content='<div class="stats">
+            <h5>primary</h5>
+                    <div>
+                <i class="fa fa-skills"></i>
+                <label>Skills</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" style="width: 40%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-charisma"></i>
+                <label>Charisma</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" style="width: 41%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-popularity"></i>
+                <label>Popularity</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" style="width: 37%;"></div>
+                </div>
+            </div>
+                    <h5>fitness</h5>
+                    <div>
+                <i class="fa fa-fitness"></i>
+                <label>Fitness</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" style="width: -4%;"></div>
+                </div>
+            </div>
+            </div>'
+                 data-title="Pino Quaresima" data-placement="auto">
+                <div class="picture"><img class="thumbnail" src="http://graph.facebook.com/596467949/picture"></div>
+                <div class="description">
+                    <i class="fa fa-medkit" style="color: #C00;"></i>            </div>
+                <a class="btn btn-success heal"><i class="fa fa-medkit"></i></a>        </div>
+            <div class="clearfix player" data-id="10"
+                 data-html="true" data-content='<div class="stats">
+            <h5>primary</h5>
+                    <div>
+                <i class="fa fa-skills"></i>
+                <label>Skills</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 81%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-charisma"></i>
+                <label>Charisma</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" style="width: 12%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-popularity"></i>
+                <label>Popularity</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" style="width: 43%;"></div>
+                </div>
+            </div>
+                    <h5>fitness</h5>
+                    <div>
+                <i class="fa fa-fitness"></i>
+                <label>Fitness</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 92%;"></div>
+                </div>
+            </div>
+            </div>'
+                 data-title="Jeannette Hélène Paladino-Aerne" data-placement="auto">
+                <div class="picture"><img class="thumbnail" src="http://graph.facebook.com/828934527/picture"></div>
+                <div class="description">
+                </div>
+            </div>
+            <div class="clearfix player" data-id="21"
+                 data-html="true" data-content='<div class="stats">
+            <h5>primary</h5>
+                    <div>
+                <i class="fa fa-skills"></i>
+                <label>Skills</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 89%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-charisma"></i>
+                <label>Charisma</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" style="width: 21%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-popularity"></i>
+                <label>Popularity</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" style="width: 20%;"></div>
+                </div>
+            </div>
+                    <h5>fitness</h5>
+                    <div>
+                <i class="fa fa-fitness"></i>
+                <label>Fitness</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 94%;"></div>
+                </div>
+            </div>
+            </div>'
+                 data-title="Don Promillo" data-placement="auto">
+                <div class="picture"><img class="thumbnail" src="http://graph.facebook.com/549970588/picture"></div>
+                <div class="description">
+                </div>
+            </div>
+            <div class="clearfix player" data-id="22"
+                 data-html="true" data-content='<div class="stats">
+            <h5>primary</h5>
+                    <div>
+                <i class="fa fa-skills"></i>
+                <label>Skills</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" style="width: 49%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-charisma"></i>
+                <label>Charisma</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" style="width: 29%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-popularity"></i>
+                <label>Popularity</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" style="width: 52%;"></div>
+                </div>
+            </div>
+                    <h5>fitness</h5>
+                    <div>
+                <i class="fa fa-fitness"></i>
+                <label>Fitness</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 95%;"></div>
+                </div>
+            </div>
+            </div>'
+                 data-title="Petar Arapovic" data-placement="auto">
+                <div class="picture"><img class="thumbnail" src="http://graph.facebook.com/643953604/picture"></div>
+                <div class="description">
+                </div>
+            </div>
+            <div class="clearfix player" data-id="23"
+                 data-html="true" data-content='<div class="stats">
+            <h5>primary</h5>
+                    <div>
+                <i class="fa fa-skills"></i>
+                <label>Skills</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" style="width: 27%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-charisma"></i>
+                <label>Charisma</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" style="width: 13%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-popularity"></i>
+                <label>Popularity</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 84%;"></div>
+                </div>
+            </div>
+                    <h5>fitness</h5>
+                    <div>
+                <i class="fa fa-fitness"></i>
+                <label>Fitness</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 84%;"></div>
+                </div>
+            </div>
+            </div>'
+                 data-title="Noemi Scheps" data-placement="auto">
+                <div class="picture"><img class="thumbnail" src="http://graph.facebook.com/573679960/picture"></div>
+                <div class="description">
+                </div>
+            </div>
+            <div class="clearfix player" data-id="24"
+                 data-html="true" data-content='<div class="stats">
+            <h5>primary</h5>
+                    <div>
+                <i class="fa fa-skills"></i>
+                <label>Skills</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" style="width: 24%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-charisma"></i>
+                <label>Charisma</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" style="width: 21%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-popularity"></i>
+                <label>Popularity</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 85%;"></div>
+                </div>
+            </div>
+                    <h5>fitness</h5>
+                    <div>
+                <i class="fa fa-fitness"></i>
+                <label>Fitness</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 95%;"></div>
+                </div>
+            </div>
+            </div>'
+                 data-title="Res Hefti" data-placement="auto">
+                <div class="picture"><img class="thumbnail" src="http://graph.facebook.com/1013454549/picture"></div>
+                <div class="description">
+                </div>
+            </div>
+            <div class="clearfix player" data-id="25"
+                 data-html="true" data-content='<div class="stats">
+            <h5>primary</h5>
+                    <div>
+                <i class="fa fa-skills"></i>
+                <label>Skills</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 82%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-charisma"></i>
+                <label>Charisma</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" style="width: 38%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-popularity"></i>
+                <label>Popularity</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" style="width: 10%;"></div>
+                </div>
+            </div>
+                    <h5>fitness</h5>
+                    <div>
+                <i class="fa fa-fitness"></i>
+                <label>Fitness</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 96%;"></div>
+                </div>
+            </div>
+            </div>'
+                 data-title="Michael Rousseau" data-placement="auto">
+                <div class="picture"><img class="thumbnail" src="http://graph.facebook.com/528947017/picture"></div>
+                <div class="description">
+                </div>
+            </div>
+            <div class="clearfix player" data-id="26"
+                 data-html="true" data-content='<div class="stats">
+            <h5>primary</h5>
+                    <div>
+                <i class="fa fa-skills"></i>
+                <label>Skills</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" style="width: 43%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-charisma"></i>
+                <label>Charisma</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 77%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-popularity"></i>
+                <label>Popularity</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" style="width: 10%;"></div>
+                </div>
+            </div>
+                    <h5>fitness</h5>
+                    <div>
+                <i class="fa fa-fitness"></i>
+                <label>Fitness</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 100%;"></div>
+                </div>
+            </div>
+            </div>'
+                 data-title="Remo Gee" data-placement="auto">
+                <div class="picture"><img class="thumbnail" src="http://graph.facebook.com/511141518/picture"></div>
+                <div class="description">
+                </div>
+            </div>
+            </div>
+            <script>
+                $(document).ready(function(){
+                    $('#roster .player').mouseover(function(){
+                        $(this).popover('show');
+                    });
+                    $('#roster .player').mouseout(function(){
+                        $(this).popover('hide');
+                    });
 
+                    $('.btn.heal').click(function(){
+                        $('#eventModal').modal({remote:'/game/player/heal/player_id/'+$(this).parent().data('id')});
+                    });
+                });
+
+                function confirmPlayerDelete(id){
+                    if(confirm('Spieler wirklich aus dem Kader werfen?')){
+                        $.ajax({
+                            url: '/game/player/delete/id/'+id,
+                            success: function(data) {
+                                $("#roster").find("[data-slide='" + id + "']").remove();
+                            }
+                        });
+                    }
+                    return false;
+                }
+            </script>            </div>
+            </div>
+            </div>
+            </div>
+            <script>
+                $(function(){
+                    $('#roster .player .picture').draggable( {
+                        stack: '#roster div.player',
+                        cursor: 'move',
+                        revert: true
+                    });
+
+                    $('#pitch .player .picture').draggable( {
+                        stack: '#pitch div.player',
+                        cursor: 'move',
+                        revert: true
+                    });
+
+                    $('#pitch .position').droppable( {
+                        accept: 'div.player .picture',
+                        hoverClass: 'hovered',
+                        drop: updatePlayerPosition
+                    });
+
+                    $('#roster .player .stats').hide();
+                    $('#roster .player').mouseenter(function(e){
+                        e.stopPropagation();
+                        $(this).find('.stats').slideDown();
+                    });
+                    $('#roster .player').mouseleave(function(e){
+                        e.stopPropagation();
+                        $(this).find('.stats').slideUp();
+                    });
+
+                    $('.btn.random').click(function(){
+                        $('#eventModal').modal({remote:'/game/event/trigger'});
+                    });
+
+                });
+
+                function updatePlayerPosition( event, ui ) {
+                    var position = $(this).data('position');
+                    var player_id = ui.draggable.closest('.player').data('id');
+
+                    $(this).find('.picture').html(ui.draggable.html());
+                    $(this).find('.stats').html(ui.draggable.closest('.player').data('content'));
+                    $(this).data('id',player_id);
+
+                    $("#pitch .player").each(function(index, value) {
+                        if($(this).data('id')==player_id && $(this).data('position')!=position){
+                            $(this).html('<div class="picture"></div><div class="name"></div><div class="stats"></div>');
+                        }
+                    });
+
+                    $.ajax({
+                        url: '/game/player/update-position',
+                        data: {'position':position,'player_id':player_id}
+                    });
+
+                    if($('#pitch .player img').length==11){
+                        $('.lessthan11').hide();
+                    }
+                }
+            </script>
             <!-- /build -->
         </div>
     </div>

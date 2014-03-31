@@ -1,6 +1,6 @@
-$icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 @import "compass/css3";
 
+$fa-font-path: "/bower_components/components-font-awesome/fonts";
 @import 'components-font-awesome/scss/font-awesome';
 
 @import '_mixins';
@@ -8,6 +8,8 @@ $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 @import '_variables';
 
 @import url(http://fonts.googleapis.com/css?family=Squada+One);
+@import url(http://fonts.googleapis.com/css?family=Lato);
+@import url(http://fonts.googleapis.com/css?family=Roboto);
 
 @import '_game';
 @import '_match';

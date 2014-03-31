@@ -336,7 +336,7 @@ module.exports = function (grunt) {
                     src: [
                         '*.*'
                     ],
-                    dest: '<%= yeoman.zend_public %>/fonts'
+                    dest: '<%= yeoman.zend_public %>/bower_components/components-font-awesome/fonts'
                 }]
             },
             zend: {

@@ -1,16 +1,18 @@
 <div class="row">
-    <div class="col-lg-7" id="formation">
+    <div class="col-lg-6" id="formation">
         <div class="panel panel-default">
             <div class="panel-heading">
+                <a data-toggle="modal" data-target="#eventModal" href="<?php echo $this->url(array('action'=>'formation')); ?>" class="btn btn-primary btn-small pull-right">
+                    <i class="fa fa-plus-sign"></i> Set Formation</a>
                 <h3 class="panel-title">Formation</h3>
             </div>
             <div class="panel-body">
-                <?php echo $this->partial('_formation.phtml',array('formation'=>$this->formation)); ?>
+                <?php echo $this->partial('_formation.phtml',array('players'=>$this->players,'formation'=>$this->team['formation']['name'])); ?>
             </div>
         </div>
     </div>
-    <div class="col-lg-5">
-        <div class="panel panel-info clearfix">
+    <div class="col-lg-6">
+        <div class="panel panel-default clearfix">
             <div class="panel-heading">
                 <h3 class="panel-title">Controls</h3>
             </div>
@@ -20,7 +22,7 @@
             </div>
         </div>
         <div class="panel panel-default clearfix">
-            <div class="panel-heading">
+            <div class="panel-heading clearfix">
                 <a href="<?php echo $this->url(array('controller'=>'team','action'=>'index')); ?>" class="btn btn-primary btn-small pull-right">
                     <i class="fa fa-plus-sign"></i> Add Friends to Team!</a>
                 <h3 class="panel-title">Roster</h3>

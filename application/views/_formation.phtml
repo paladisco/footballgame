@@ -1,28 +1,33 @@
-<?php if(count($this->formation)<11){ ?>
+<?php if(count($this->players)<11){ ?>
     <div class="alert alert-warning lessthan11">
         Du hast derzeit weniger als 11 Spieler aufgestellt! Nicht gut! Könnte in einem Match evtl. einen entscheidenden Nachteil darstellen. Stelle sicher dass du möglichst viele Spieler aufgestellt hast!
     </div>
-<?php } ?>
+<?php }
+list($defense,$midfield,$offense) = explode('-',$this->formation);
+$pos = 11;
+?>
 <div class="pitch" id="pitch">
     <div class="formation">
         <div class="offense line">
-            <?php echo $this->partial('_player.phtml',array('position'=>11,'player'=>$this->formation['11'])); ?>
-            <?php echo $this->partial('_player.phtml',array('position'=>10,'player'=>$this->formation['10'])); ?>
+            <?php for($i=0;$i<$offense;$i++){
+                echo $this->partial('_player.phtml',array('position'=>$pos,'player'=>$this->players[$pos]));
+                $pos--;
+            } ?>
         </div>
         <div class="midfield line">
-            <?php echo $this->partial('_player.phtml',array('position'=>9,'player'=>$this->formation['9'])); ?>
-            <?php echo $this->partial('_player.phtml',array('position'=>8,'player'=>$this->formation['8'])); ?>
-            <?php echo $this->partial('_player.phtml',array('position'=>7,'player'=>$this->formation['7'])); ?>
-            <?php echo $this->partial('_player.phtml',array('position'=>6,'player'=>$this->formation['6'])); ?>
+            <?php for($i=0;$i<$midfield;$i++){
+                echo $this->partial('_player.phtml',array('position'=>$pos,'player'=>$this->players[$pos]));
+                $pos--;
+            } ?>
         </div>
         <div class="defense line">
-            <?php echo $this->partial('_player.phtml',array('position'=>5,'player'=>$this->formation['5'])); ?>
-            <?php echo $this->partial('_player.phtml',array('position'=>4,'player'=>$this->formation['4'])); ?>
-            <?php echo $this->partial('_player.phtml',array('position'=>3,'player'=>$this->formation['3'])); ?>
-            <?php echo $this->partial('_player.phtml',array('position'=>2,'player'=>$this->formation['2'])); ?>
+            <?php for($i=0;$i<$defense;$i++){
+                echo $this->partial('_player.phtml',array('position'=>$pos,'player'=>$this->players[$pos]));
+                $pos--;
+            } ?>
         </div>
         <div class="goalkeeper line">
-            <?php echo $this->partial('_player.phtml',array('position'=>1,'player'=>$this->formation['1'])); ?>
+            <?php echo $this->partial('_player.phtml',array('position'=>1,'player'=>$this->players['1'])); ?>
         </div>
     </div>
 </div>

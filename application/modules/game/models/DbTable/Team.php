@@ -16,8 +16,10 @@ class Game_Model_DbTable_Team extends RF_Model_Regular
     public function getEntryByUser($fb_user_id){
         if($result = $this->fetchRow('fb_uid="'.$fb_user_id.'"')){
             $playerModel = new Game_Model_DbTable_Player();
+            $formationModel = new Game_Model_DbTable_Formation();
             $team = $result->toArray();
             $team['players'] = $playerModel->getByTeam($team['id']);
+            $team['formation'] = $formationModel->getEntry($team['formation_id']);
             return $team;
         }else{
             return false;

@@ -4,73 +4,79 @@
 .summary{
     padding: 5px;
 }
+.controls{
+  height: 50px;
+  padding-bottom: 10px;
+}
 .log{
-    font-size: 16px;
+  font-size: 16px;
+  .row {
+    .alert{
+      padding: 5px;
+    }
+    .info{
+      text-align: center;
+    }
+    > div{
+      position: relative;
+    }
+    .element{
+      display: inline;
+      padding: 3px;
+      img{
+        padding: 3px;
+      }
+      .message{
+        margin: 5px;
+      }
+    }
+    .element.message{
+      width: 70%;
+    }
+    .minute{
+      position: absolute;
+      width: 10px;
+      font-family: "Squada One";
+      color: #069;
+      font-size: 11px;
+    }
+    .right .minute{
+      top: 4px;
+      right: 4px;
+    }
+    .middle .minute{
+      top: 4px;
+      left: 4px;
+    }
+    .left .minute{
+      top: 4px;
+      left: 4px;
+    }
+    .col-lg-6 .element{
+      float: right;
+    }
+    .col-lg-offset-6 .element{
+      float: left;
+    }
+    .info .element{
+      float: none;
+    }
+  }
+  .large{
+    font-size: 180%;
+  }
 }
-.log .row .alert{
-    padding: 5px;
-}
-.log .row .col-lg-6,.summary .row .col-lg-6{
-    text-align: right;
-}
-.log .row .col-lg-offset-6,.summary .row .col-lg-offset-6{
-    text-align: left;
-}
-.log .row .info{
-    text-align: center;
-}
-.log .row > div{
-    position: relative;
-}
-.log .row .element{
-    display: inline;
-    padding: 3px;
-}
-.log .row .minute{
-    position: absolute;
-    width: 10px;
-    font-family: "Squada One";
-    color: #069;
-    font-size: 11px;
-}
-.log .row .right .minute{
-    top: 4px;
-    right: 4px;
-}
-.log .row .middle .minute{
-    top: 4px;
-    left: 4px;
-}
-.log .row .left .minute{
-    top: 4px;
-    left: 4px;
-}
-.log .row .element.message{
-    width: 70%;
-}
-.log .row .col-lg-6 .element{
-    float: right;
-}
-.log .row .col-lg-offset-6 .element{
-    float: left;
-}
-.log .row .info .element{
-    float: none;
-}
-.log .row .element img{
-    padding: 3px;
-}
-.log .row .element .message{
-    margin: 5px;
-}
-
 .score{
     font-size: 72px;
     font-family: "Squada One";
     text-align: center;
 }
-.log .large{
-    font-size: 180%;
+
+.log .row .col-lg-6,.summary .row .col-lg-6{
+  text-align: right;
+}
+.log .row .col-lg-offset-6,.summary .row .col-lg-offset-6{
+  text-align: left;
 }
 
 
@@ -81,13 +87,15 @@
     background-color: #006600;
     background-repeat: no-repeat;
     background-size: 100%;
-}
-#match .pitch .player{
+  .player{
     position: absolute;
     -webkit-transition: width 1s ease-in-out;
     transition: width 1s ease-in-out;
-}
-#match .pitch .ball{
+    margin-left: -30px;
+    margin-top: -45px;
+    z-index: 80;
+  }
+  .ball{
     position: absolute;
     width: 30px;
     height: 30px;
@@ -99,10 +107,5 @@
     z-index: 90;
     -webkit-transition: width 1s ease-in-out;
     transition: width 1s ease-in-out;
-}
-#match .pitch .player{
-    position: absolute;
-    margin-left: -30px;
-    margin-top: -45px;
-    z-index: 80;
+  }
 }

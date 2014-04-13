@@ -18,7 +18,20 @@ class Game_IndexController extends Local_Controller_Action
 
         $playerModel = new Game_Model_DbTable_Player();
         $this->view->team = $this->team;
-        $this->view->formation = $playerModel->getFormationByTeam($this->team['id']);
+        $this->view->players = $playerModel->getFormationByTeam($this->team['id']);
+    }
+
+    public function formationAction(){
+        $this->_helper->layout->disableLayout();
+
+        if($f = $this->getRequest()->getPost()){
+            $teamModel = new Game_Model_DbTable_Team();
+            $teamModel->updateEntry(array('formation_id'=>$f['formation_id']),$this->team['id']);
+            $this->_redirect($this->view->url(array('action'=>'dashboard')));
+        }
+        $formationModel = new Game_Model_DbTable_Formation();
+        $this->view->formations = $formationModel->fetchAll()->toArray();
+        $this->view->currentFormation = $this->team->formation_id;
     }
 
     public function rankingAction(){

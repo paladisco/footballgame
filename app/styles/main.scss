@@ -8,8 +8,7 @@ $fa-font-path: "/bower_components/components-font-awesome/fonts";
 @import '_variables';
 
 @import url(http://fonts.googleapis.com/css?family=Squada+One);
-@import url(http://fonts.googleapis.com/css?family=Lato);
-@import url(http://fonts.googleapis.com/css?family=Roboto);
+@import url(http://fonts.googleapis.com/css?family=Alegreya+Sans:300,400,700);
 
 @import '_game';
 @import '_match';
@@ -27,6 +26,101 @@ $fa-font-path: "/bower_components/components-font-awesome/fonts";
   -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
 }
 
-$global-header-height: 10rem;
-$global-footer-height: 10rem;
+html {
+  font-size: 42.5%;
 
+  @media #{$tablet_break} {
+    font-size: 52.5%;
+  }
+
+  @media #{$netbook_break} {
+    font-size: 62.5%;
+  }
+}
+
+
+@-webkit-keyframes fontfix{
+  from { opacity: 1; }
+  to { opacity: 1; }
+}
+
+body
+{
+  -webkit-animation-duration: 0.1s;
+  -webkit-animation-name: fontfix;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-delay: 0.1s;
+  font-family: $font-family;
+  color: #000;
+  font-weight: 400;
+  @include font-size(14);
+  background-image: url("images/large_leather.png");
+  background-color: #FCFCFC;
+  margin-top: 50px;
+}
+
+h1,h2,h3,h4,h5{
+  font-family: "Squada One";
+  margin: 0;
+  padding: 0;
+}
+
+.page-header{
+  margin: 0 0 20px 0;
+  padding: 0;
+  border-color: #999;
+}
+
+h1 {
+  color: $h1_colour;
+  margin-bottom: $h1_margin_bottom;
+  @include font-size(60); // Pixels
+  small{
+    color: #999;
+  }
+}
+
+h2 {
+  color: $h2_colour;
+  letter-spacing: 1rem;
+  text-transform: uppercase;
+  margin-bottom: $h2_margin_bottom;
+  @include font-size(48); // Pixels
+}
+
+h3 {
+  color: $h3_colour;
+  margin-bottom: $h3_margin_bottom;
+  @include font-size(25); // Pixels
+}
+
+a {
+  color: $link_colour;
+  text-decoration: none;
+  @include font-size(14); // Pixels
+}
+
+a:hover {
+  color: $link_hover_colour;
+  text-decoration: none;
+  @include transition(color, 350ms);
+}
+
+
+.btn {
+  @include border-radius($btn_radius);
+  @include font-size(18); // Pixels
+}
+
+.btn-primary{
+  background-color: $link_colour;
+}
+
+.main{
+  padding: 2rem;
+}
+
+.navbar{
+  background-color: $link_colour;
+}

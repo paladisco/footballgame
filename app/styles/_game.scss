@@ -1,63 +1,8 @@
-body
-{
-    -webkit-animation-duration: 0.1s;
-    -webkit-animation-name: fontfix;
-    -webkit-animation-iteration-count: 1;
-    -webkit-animation-timing-function: linear;
-    -webkit-animation-delay: 0.1s;
-}
 
-@-webkit-keyframes fontfix{
-    from { opacity: 1; }
-    to { opacity: 1; }
-}
-body{
-    font-family: "Roboto",Verdana,sans-serif;
-    color: #000;
-    font-weight: 400;
-    font-size: 13px;
-    background-image: url("images/handmadepaper.png");
-    background-color: #FCFCFC;
-    padding-top: 50px;
-}
-
-h1,h2,h3,h4,h5{
-    font-family: "Squada One";
-    margin: 0;
-    padding: 0;
-}
-h1{
-    font-size: 48px;
-}
-.main{
-    padding: 0 20px;
-}
-.main h2{
-    font-size: 32px;
-    text-align: left;
-    padding: 10px 0 3px;
-    margin-bottom: 20px;
-    font-weight: 100;
-    color: #666;
-}
-.main h3{
-    font-weight: 100;
-    font-size: 28px;
-    text-align: left;
-    text-transform: uppercase;
-}
-.main h4{
-    font-weight: 700;
-    font-size: 18px;
-    text-align: left;
-    margin-top: 0;
-    padding-top: 0;
-}
-
-.icon-fitness:before                { content: "\f0fe"; }
-.icon-skills:before                 { content: "\f140"; }
-.icon-popularity:before             { content: "\f005"; }
-.icon-charisma:before               { content: "\f004"; }
+.fa-fitness:before                { content: "\f0fe"; }
+.fa-skills:before                 { content: "\f140"; }
+.fa-popularity:before             { content: "\f005"; }
+.fa-charisma:before               { content: "\f004"; }
 
 #roster .stats{
     min-width: 200px;

@@ -5,11 +5,13 @@
                 <i class="fa fa-refresh"></i> Reset Match
             </a>
             <div class="col-lg-6">
-                <div class="controls" id="matchControls">
-                    <?php echo $this->partial('match/_controls.phtml',array('situation'=>$this->situation)); ?>
-                </div>
-                <div id="skillContainer">
+                <div class="controls">
+                    <div id="matchControls">
+                        <?php echo $this->partial('match/_controls.phtml',array('situation'=>$this->situation)); ?>
+                    </div>
+                    <div id="skillContainer">
 
+                    </div>
                 </div>
             </div>
             <div class="col-lg-6">
@@ -23,7 +25,7 @@
             <div class="col-lg-6">
                 <h4><span class="label label-danger"><?php echo $this->awayTeam->getName(); ?></span></h4>
             </div>
-            <div id="summary">
+            <div id="summary" class="summary">
                 <?php echo $this->partial('match/_summary.phtml',array('summary'=>$this->summary)); ?>
             </div>
         </div>

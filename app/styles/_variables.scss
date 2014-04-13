@@ -1,29 +1,30 @@
 // BODY
 $bg_colour: #000;
 
-$font-family: "Nexa";
+$font-family: "Alegreya Sans",Verdana,sans-serif;
 $font_colour: #000;
 $font_weight: 300;
 $font_size: 14; // pixels
 
 // LINKS
-$link_colour: #999;
+$link_colour: #0a6c4c;
 $link_hover_colour: #CCC;
 
 // TITLES
-$h_font_family: "Nexa";
+$h_font_family: "Squada One";
 
 $h1_colour: #222;
 $h2_colour: #444;
 $h3_colour: #666;
 
-$h1_margin_bottom: 30px;
-$h2_margin_bottom: 20px;
+$h1_margin_bottom: 10px;
+$h2_margin_bottom: 10px;
 $h3_margin_bottom: 10px;
 
 // BUTTONS
-$btn_background: #EEE;
-$btn_border: 1px solid #DDD;
+$btn_background: #FFF;
+$btn_border: 1px solid #999;
 $btn_padding: 5px 10px;
-$btn_radius: 15px;
+$btn_radius: 100px;
 $btn_min_width: 120px;
+

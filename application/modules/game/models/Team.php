@@ -5,8 +5,9 @@ class Game_Model_Team
     private $_info;
     private $_formation;
     private $_side;
+    private $_lines;
 
-    public function __construct($team_id,$side,$formation='4-4-2'){
+    public function __construct($team_id,$side){
         $teamModel = new Game_Model_DbTable_Team();
         $this->_info = $teamModel->getEntry($team_id);
 
@@ -18,11 +19,17 @@ class Game_Model_Team
             $this->_players[$p['position']] = new Game_Model_Player($p['id']);
         }
 
-        $lines = explode('-',$formation);
-        $pos = 2;
+        $formationModel = new Game_Model_DbTable_Formation();
+        $formation = $formationModel->getEntry($this->_info['formation_id']);
+
+        $lines = explode('-',$formation['name']);
+        $pos = 11;
+
         foreach($lines as $line){
-            $pos += $line-1;
-            $this->_formation[] = $pos;
+            for($i=0;$i<$line;$i++){
+                $this->_lines[$line][] = $this->_players[$pos];
+                $pos--;
+            }
         }
     }
 
@@ -37,6 +44,26 @@ class Game_Model_Team
     public function getSide(){
         return $this->_side;
     }
+
+    private function _getRandomPlayerByLine($line,$noPossession=true){
+        $player = array_rand($this->_lines[$line]);
+        if($player){
+            if($player->isActive() && ($noPossession?!$player->hasPossession():1)){
+                return $player;
+            }
+        }
+        return $this->getRandomPlayerByLine($line,$noPossession);
+    }
+
+    public function getRandomDefender($noPossession=true){
+        return $this->_getRandomPlayerByLine(0,$noPossession);
+    }
+    public function getRandomMidfielder($noPossession=true){
+        return $this->_getRandomPlayerByLine(1,$noPossession);
+    }
+    public function getRandomAttacker($noPossession=true){
+        return $this->_getRandomPlayerByLine(2,$noPossession);
+    }
     /**
      * @param bool $noPossession
      * @return object Game_Model_Player
@@ -48,7 +75,7 @@ class Game_Model_Team
                 return $player;
             }
         }
-        return $this->getRandomFieldPlayer();
+        return $this->getRandomFieldPlayer($noPossession);
     }
 
     /**

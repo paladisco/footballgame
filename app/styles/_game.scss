@@ -1,4 +1,8 @@
-
+img.thumbnail{
+  @include border-radius(100px);
+  padding: 2px;
+  border: 1px;
+}
 .fa-fitness:before                { content: "\f0fe"; }
 .fa-skills:before                 { content: "\f140"; }
 .fa-popularity:before             { content: "\f005"; }

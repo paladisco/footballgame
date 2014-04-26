@@ -6,6 +6,7 @@ class Game_Model_DbTable_Team extends RF_Model_Regular
 
     public function insertEntry($f,$user){
         $f['founded'] = time();
+        $f['formation_id'] = 1;
         $f['fb_uid'] = $user['id'];
         $f['fb_name'] = $user['name'];
         $pic = json_decode(file_get_contents('https://graph.facebook.com/'.$user['username'].'/picture?redirect=false'),true);

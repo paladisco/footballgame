@@ -3,7 +3,6 @@ class Game_Model_Team
 {
     private $_players;
     private $_info;
-    private $_formation;
     private $_side;
     private $_lines;
 
@@ -25,11 +24,13 @@ class Game_Model_Team
         $lines = explode('-',$formation['name']);
         $pos = 11;
 
+        $lineCount = 0;
         foreach($lines as $line){
             for($i=0;$i<$line;$i++){
-                $this->_lines[$line][] = $this->_players[$pos];
+                $this->_lines[$lineCount][] = $this->_players[$pos];
                 $pos--;
             }
+            $lineCount++;
         }
     }
 
@@ -46,24 +47,55 @@ class Game_Model_Team
     }
 
     private function _getRandomPlayerByLine($line,$noPossession=true){
-        $player = array_rand($this->_lines[$line]);
-        if($player){
-            if($player->isActive() && ($noPossession?!$player->hasPossession():1)){
-                return $player;
+        if($this->_lines[$line]){
+            $player = $this->_lines[$line][array_rand($this->_lines[$line])];
+            if($player){
+                if($player->isActive() && ($noPossession?!$player->hasPossession():1)){
+                    return $player;
+                }
             }
+            return $this->_getRandomPlayerByLine($line,$noPossession);
+        }else{
+            return false;
         }
-        return $this->getRandomPlayerByLine($line,$noPossession);
     }
 
     public function getRandomDefender($noPossession=true){
-        return $this->_getRandomPlayerByLine(0,$noPossession);
+        return $this->_getRandomPlayerByLine(2,$noPossession);
     }
     public function getRandomMidfielder($noPossession=true){
         return $this->_getRandomPlayerByLine(1,$noPossession);
     }
     public function getRandomAttacker($noPossession=true){
-        return $this->_getRandomPlayerByLine(2,$noPossession);
+        return $this->_getRandomPlayerByLine(0,$noPossession);
     }
+
+    /**
+     * @param bool $noPossession
+     * @return object Game_Model_Player
+     */
+    public function getRandomFieldPlayerByDistance($distance,$noPossession=true){
+        Local_DiceRoll::log("Defining Receiver at Distance ".$distance);
+
+        if($distance>=0 && $distance<34){
+            Local_DiceRoll::log("Looking for Attacker");
+            $player = $this->getRandomAttacker($noPossession);
+        }elseif($distance>33 && $distance<64){
+            Local_DiceRoll::log("Looking for Mitfielder");
+            $player = $this->getRandomMidfielder($noPossession);
+        }else{
+            Local_DiceRoll::log("Looking for Defender");
+            $player = $this->getRandomDefender($noPossession);
+        }
+        if($player){
+            Local_DiceRoll::log("Found receiver ".$player->getName());
+            return $player;
+        }else{
+            Local_DiceRoll::log("Looking for Random Player, cuz no one found.");
+            return $this->getRandomFieldPlayer($noPossession);
+        }
+    }
+
     /**
      * @param bool $noPossession
      * @return object Game_Model_Player

@@ -34,20 +34,25 @@ class Game_IndexController extends Local_Controller_Action
         $this->view->currentFormation = $this->team->formation_id;
     }
 
-    public function rankingAction(){
+    public function challengeAction(){
         $friends = $this->_facebook_api->api('/'.$this->_facebook_user_id.'/friends?fields=installed');
         $teamModel = new Game_Model_DbTable_Team();
         $return = array();
+        $matchModel = new Game_Model_DbTable_Match();
         $playerModel = new Game_Model_DbTable_Player();
         foreach($friends['data'] as $f){
             if($team = $teamModel->getEntryByUser($f['id'])){
                 $players = $playerModel->fetchAll('position!=0 AND team_id='.(int)$team['id']);
-                if(count($players)){
+                $match = $matchModel->hasOpenMatch($this->team['id'],$team['id']);
+                if(count($players) && !$match){
                     $return[] = $team;
+                }elseif($match){
+                    $open[] = $match;
                 }
             }
         }
         $this->view->friends = $return;
+        $this->view->open = $open;
 
     }
 

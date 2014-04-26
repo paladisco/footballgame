@@ -24,7 +24,20 @@
             <label><![CDATA[<i class="fa fa-gamepad"></i> Challenge]]></label>
             <module>game</module>
             <controller>index</controller>
-            <action>ranking</action>
+            <pages>
+                <ongoing>
+                    <label><![CDATA[<i class="fa fa-facebook-sign"></i> Ongoing Matches]]></label>
+                    <module>game</module>
+                    <controller>match</controller>
+                    <action>index</action>
+                </ongoing>
+                <challenge>
+                    <label><![CDATA[<i class="fa fa-facebook-sign"></i> Challenge a Friend]]></label>
+                    <module>game</module>
+                    <controller>index</controller>
+                    <action>challenge</action>
+                </challenge>
+            </pages>
         </challenge>
 	</de>
 </configdata>

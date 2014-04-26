@@ -81,12 +81,19 @@ function updatePlayerPosition( event, ui ) {
     $("#pitch .player").each(function(index, value) {
         if($(this).data('id')==player_id && $(this).data('position')!=position){
             $(this).html('<div class="picture"></div><div class="name"></div><div class="stats"></div>');
+            $(this).data('id','');
         }
+    });
+
+    var position = [];
+    $('#pitch .player').each(function(){
+        position[$(this).data('position')] = $(this).data('id');
     });
 
     $.ajax({
         url: '<?php echo $this->url(array('controller'=>'player','action'=>'update-position')) ?>',
-        data: {'position':position,'player_id':player_id}
+        data: {'position':JSON.stringify(position)},
+        type: 'post'
     });
 
     if($('#pitch .player img').length==11){

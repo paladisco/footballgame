@@ -3,43 +3,51 @@ class Game_MatchController extends Local_Controller_Action
 {
     /**
      * @var $_match Game_Model_Match
+     * @var $_model Game_Model_DbTable_Match
      */
     private $_match;
+    private $_model;
+    private $_match_id;
 
     public function init(){
         parent::init();
-        if($this->getRequest()->getParam('reset')){
-            unset($this->_storage->match);
-            $this->_redirect($this->view->url(array('reset'=>null)));
-        }
-        if($this->_storage->match){
-            $this->_match = $this->_storage->match;
-        }else{
-            $this->_match = null;
+        $this->_model = new Game_Model_DbTable_Match();
+        if($match_id=$this->_getParam('match_id')){
+            $this->_match = $this->_model->getState($match_id);
+            $this->_match_id = $match_id;
         }
     }
 
-    public function indexAction()
+    public function indexAction(){
+        $this->view->matches = $this->_model->getOngoingMatches($this->team['id']);
+    }
+
+    public function startAction(){
+        $homeTeamId = $this->team['id'];
+        $awayTeamId = $this->getRequest()->getParam('away_team_id');
+        $match = new Game_Model_Match($homeTeamId,$awayTeamId);
+        $match_id = $this->_model->initMatch($homeTeamId,$awayTeamId,$match);
+        $this->_redirect($this->view->url(array('action'=>'view','match_id'=>$match_id)));
+    }
+
+    public function viewAction()
     {
-        if(!$this->_storage->match){
-            $homeTeamId = $this->team['id'];
-            $awayTeamId = $this->getRequest()->getParam('away_team_id');
-            $match = new Game_Model_Match($homeTeamId,$awayTeamId);
-            $this->_storage->match = $match;
-        }else{
+        if($match_id=$this->_getParam('match_id')){
             $match = $this->_match;
+
+            $this->view->title = "Match Time";
+            $this->view->headline = $match->getLineup();
+            $this->view->log = $match->getEventLog();
+
+            $this->view->summary = $match->getSummary();
+            $this->view->pitch = $match->getPitch();
+            $this->view->situation = $match->getSituation();
+            $this->view->homeTeam = $match->getHomeTeam();
+            $this->view->awayTeam = $match->getAwayTeam();
         }
 
-        $this->view->title = "Match Time";
-        $this->view->headline = $match->getLineup();
-        $this->view->log = $match->getEventLog();
-
-        $this->view->summary = $match->getSummary();
-        $this->view->pitch = $match->getPitch();
-        $this->view->situation = $match->getSituation();
-        $this->view->homeTeam = $match->getHomeTeam();
-        $this->view->awayTeam = $match->getAwayTeam();
     }
+
 
     public function playAction(){
 
@@ -73,7 +81,11 @@ class Game_MatchController extends Local_Controller_Action
 
         }
 
-        $this->_storage->match = $this->_match;
+        $this->_model->saveState($this->_match_id,$this->_match);
+
+        if($this->_match->hasEnded()){
+            $this->_model->saveMatch($this->_match_id,$this->_match);
+        }
 
     }
 

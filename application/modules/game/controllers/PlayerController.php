@@ -42,10 +42,15 @@ class Game_PlayerController extends Local_Controller_Action
     public function updatePositionAction(){
         $this->_helper->viewRenderer->setNoRender(true);
         $this->_helper->layout->disableLayout();
-        if($player_id = $this->_getParam('player_id')){
-            $this->_model->update(array(
-                'position' => $this->_getParam('position')
-            ),'id='.(int)$player_id);
+        if($position = json_decode($this->_getParam('position'))){
+            $this->_model->update(array('position'=>0),'team_id='.(int)$this->team['id']);
+            foreach($position as $pos => $player_id){
+                if($pos && $player_id){
+                    $this->_model->update(array(
+                        'position' => $pos
+                    ),'id='.(int)$player_id);
+                }
+            }
         }
     }
 

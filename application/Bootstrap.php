@@ -44,7 +44,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         if(strstr(APPLICATION_ENV,'development')){
             $writer = new Zend_Log_Writer_Firebug();
             $logger = new Zend_Log($writer);
+            $logger->registerErrorHandler();
             Zend_Registry::set('logger', $logger);
+        }else{
+            Zend_Registry::set('logger',null);
         }
     }
 

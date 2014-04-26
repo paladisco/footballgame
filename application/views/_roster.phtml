@@ -16,10 +16,12 @@
 </div>
 <script>
     $(document).ready(function(){
-        $('#roster .player').mouseover(function(){
+        $('#roster .player').mouseenter(function(e){
+            e.stopPropagation();
             $(this).popover('show');
         });
-        $('#roster .player').mouseout(function(){
+        $('#roster .player').mouseleave(function(e){
+            e.stopPropagation();
             $(this).popover('hide');
         });
 

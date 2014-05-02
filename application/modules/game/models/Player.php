@@ -24,7 +24,7 @@ class Game_Model_Player
     }
 
     public function getPicture(){
-        return 'http://graph.facebook.com/'.$this->_info['fb_uid'].'/picture';
+        return 'http://graph.facebook.com/'.$this->_info['fb_uid'].'/picture?type=normal';
     }
 
     public function getPosition(){

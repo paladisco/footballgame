@@ -38,6 +38,14 @@ class Game_Model_Team
         return $this->_info['name'];
     }
 
+    public function getPrimaryColor(){
+        return $this->_info['color_primary'];
+    }
+
+    public function getSecondaryColor(){
+        return $this->_info['color_secondary'];
+    }
+
     public function getPicture(){
         return $this->_info['profile_pic'];
     }

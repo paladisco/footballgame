@@ -14,7 +14,9 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css /styles/vendor.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/jquery-ui/themes/cupertino/jquery-ui.css" />
     <link rel="stylesheet" href="bower_components/sass-bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/spectrum/spectrum.css" />
     <!-- endbower -->
     <link rel="stylesheet" href="bower_components/flat-ui-official/css/flat-ui.css" />
     <!-- endbuild -->
@@ -29,9 +31,15 @@
     <!-- bower:js -->
     <script src="bower_components/jquery/jquery.js"></script>
     <script src="bower_components/jquery-ui/ui/jquery-ui.js"></script>
+    <script src="bower_components/jquery-ui/ui/jquery.ui.core.js"></script>
+    <script src="bower_components/jquery-ui/ui/jquery.ui.widget.js"></script>
+    <script src="bower_components/jquery-ui/ui/jquery.ui.position.js"></script>
+    <script src="bower_components/jquery-ui/ui/jquery.ui.menu.js"></script>
+    <script src="bower_components/jquery-ui/ui/jquery-ui.autocomplete.js"></script>
     <script src="bower_components/sass-bootstrap/dist/js/bootstrap.js"></script>
-    <script src="bower_components/typeahead.js/dist/typeahead.bundle.js"></script>
+    <script src="bower_components/spectrum/spectrum.js"></script>
     <script src="scripts/vendor/jquery.path.js"></script>
+    <script src="scripts/vendor/jquery-ui-combobox-widget.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 </head>
@@ -50,284 +58,560 @@
             <!-- zend:layout content -->
             <!-- build:remove -->
 
-
-                        <div class="row" id="match">
-                <div class="col-lg-6">
-                    <div class="row">
-                        <a class="pull-right btn btn-danger btn-small" id="actionButton" href="/game/match/index/away_team_id/3/reset/1">
-                            <i class="fa fa-refresh"></i> Reset Match
-                        </a>
-                        <div class="col-lg-6">
-                            <div class="controls" id="matchControls">            <a class="btn btn-primary actionButton" data-loading-text="attempting..." data-instruction="dribble" style="display: none;">
-                        Dribble on!
-                    </a>
-                    <a class="btn btn-primary actionButton skillModified" data-skill="accuracy" data-loading-text="attempting..." data-instruction="pass" style="display: none;">
-                    Pass the ball!
-                </a>
-                    </div>
-                            <div id="skillContainer"><a class="btn hit btn-primary pull-left">Hit it!</a><div class="progress accuracy"><div class="progress-bar gauge" style="width: 0%;"></div></div></div>
-                        </div>
-                        <div class="col-lg-6">
-
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <h4 style="text-align: right;"><span class="label label-success">Diego Paladino FC</span></h4>
-                        </div>
-                        <div class="col-lg-6">
-                            <h4><span class="label label-danger">Sharky Racerfish FC</span></h4>
-                        </div>
-                        <div id="summary"><div class="row">
-                <div class="col-lg-12 score">
-                    0 : 0    </div>
+            <div class="page-header">
+                <h1>Team Manager                            <small>Add and remove players from your roster</small>
+                </h1>
             </div>
-            <div class="summary">
-                </div></div>
+
+            <div class="row">
+            <div class="col-lg-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-add"></i> Add Player</h3>
                     </div>
-                    <div id="matchLog">
-                        <div class="log"><div class="row" style="">
-                    <div class="alert alert-info col-lg-6 left">
-                    <div class="minute">9'</div>
-            <!--        --><!--<div class="team element"><img src="--><!--" /></div>-->        <div class="player element"><img class="thumbnail" src="http://graph.facebook.com/517233293/picture"></div>        <div class="message element ">Daniel Ritschard dribbles around with the ball, as Stephan Groth goes in for a tackling and wins posession!</div>
-                </div>
-            </div><div class="row" style="">
-                    <div class="alert alert-info col-lg-6 col-lg-offset-6 right">
-                    <div class="minute">8'</div>
-            <!--        --><!--<div class="team element"><img src="--><!--" /></div>-->        <div class="player element"><img class="thumbnail" src="http://graph.facebook.com/578962187/picture"></div>        <div class="message element ">Rimini W. Frosch dribbles around with the ball, as Daniel Ritschard goes in for a tackling and wins posession!</div>
-                </div>
-            </div><div class="row" style="">
-                    <div class="alert alert-info col-lg-6 left">
-                    <div class="minute">7'</div>
-            <!--        --><!--<div class="team element"><img src="--><!--" /></div>-->        <div class="player element"><img class="thumbnail" src="http://graph.facebook.com/527649474/picture"></div>        <div class="message element ">Rimini W. Frosch dribbles around with the ball and skillfully moves the ball forward!</div>
-                </div>
-            </div><div class="row" style="">
-                    <div class="alert alert-info col-lg-6 left">
-                    <div class="minute">6'</div>
-            <!--        --><!--<div class="team element"><img src="--><!--" /></div>-->        <div class="player element"><img class="thumbnail" src="http://graph.facebook.com/527649474/picture"></div>        <div class="message element ">Daniel Ritschard loses possession, Rimini W. Frosch has got the ball now.</div>
-                </div>
-            </div><div class="row" style="">
-                    <div class="alert alert-info col-lg-6 col-lg-offset-6 right">
-                    <div class="minute">5'</div>
-            <!--        --><!--<div class="team element"><img src="--><!--" /></div>-->        <div class="player element"><img class="thumbnail" src="http://graph.facebook.com/578962187/picture"></div>        <div class="message element ">Sandra Defant passes the ball to Daniel Ritschard, who successfully claims the ball.</div>
-                </div>
-            </div><div class="row" style="">
-                    <div class="alert alert-info col-lg-6 col-lg-offset-6 right">
-                    <div class="minute">4'</div>
-            <!--        --><!--<div class="team element"><img src="--><!--" /></div>-->        <div class="player element"><img class="thumbnail" src="http://graph.facebook.com/1051093481/picture"></div>        <div class="message element "> to Sandra Defant, who successfully claims the ball.</div>
-                </div>
-            </div><div class="row" style="">
-                    <div class="alert alert-info col-lg-6 col-lg-offset-6 right">
-                    <div class="minute">4'</div>
-            <!--        --><!--<div class="team element"><img src="--><!--" /></div>-->        <div class="player element"><img class="thumbnail" src="http://graph.facebook.com/687072264/picture"></div>        <div class="message element ">Stefan Tobler brings the ball back into play.</div>
-                </div>
-            </div><div class="row" style="">
-                    <div class="alert alert-info col-lg-6 col-lg-offset-6 right">
-                    <div class="minute">3'</div>
-            <!--        --><!--<div class="team element"><img src="--><!--" /></div>-->        <div class="player element"><img class="thumbnail" src="http://graph.facebook.com/687072264/picture"></div>        <div class="message element ">It comes for a goal kick!</div>
-                </div>
-            </div><div class="row" style="">
-                    <div class="alert alert-info col-lg-6 left">
-                    <div class="minute">3'</div>
-            <!--        --><!--<div class="team element"><img src="--><!--" /></div>-->        <div class="player element"><img class="thumbnail" src="http://graph.facebook.com/643953604/picture"></div>        <div class="message element ">Petar Arapovic completely misses the Target. What a waster!</div>
-                </div>
-            </div><div class="row" style="">
-                    <div class="alert alert-info col-lg-6 left">
-                    <div class="minute">3'</div>
-            <!--        --><!--<div class="team element"><img src="--><!--" /></div>-->        <div class="player element"><img class="thumbnail" src="http://graph.facebook.com/643953604/picture"></div>        <div class="message element ">Petar Arapovic takes aim and shoots...</div>
-                </div>
-            </div><div class="row" style="">
-                    <div class="alert alert-info col-lg-6 left">
-                    <div class="minute">2'</div>
-            <!--        --><!--<div class="team element"><img src="--><!--" /></div>-->        <div class="player element"><img class="thumbnail" src="http://graph.facebook.com/643953604/picture"></div>        <div class="message element ">Noemi Scheps passes the ball to Petar Arapovic, who successfully claims the ball.</div>
-                </div>
-            </div><div class="row" style="">
-                    <div class="alert alert-info col-lg-6 left">
-                    <div class="minute">1'</div>
-            <!--        --><!--<div class="team element"><img src="--><!--" /></div>-->        <div class="player element"><img class="thumbnail" src="http://graph.facebook.com/573679960/picture"></div>        <div class="message element ">Meinhard Meintjes dribbles around with the ball, as Noemi Scheps goes in for a tackling and wins posession!</div>
-                </div>
-            </div><div class="row" style="">
-                    <div class="alert alert-info col-lg-6 col-lg-offset-6 right">
-                    <div class="minute">0'</div>
-            <!--        --><!--<div class="team element"><img src="--><!--" /></div>-->        <div class="player element"><img class="thumbnail" src="http://graph.facebook.com/608681917/picture"></div>        <div class="message element ">Sharky Racerfish FC kicks off. Meinhard Meintjes is on the ball.</div>
-                </div>
-            </div><div class="row" style="">
-                    <div class="alert alert-info col-lg-6 col-lg-offset-6 right">
-                    <div class="minute">0'</div>
-            <!--        --><!--<div class="team element"><img src="--><!--" /></div>-->                <div class="message element ">Sharky Racerfish FC wins the Coin Toss!</div>
-                </div>
-            </div>
-                <div class="row">
-                    <div class="info alert alert-info col-lg-6 col-lg-offset-3 middle">
-                    <div class="minute">0'</div>
-            <!--        --><!--<div class="team element"><img src="--><!--" /></div>-->                <div class="message element ">Match is about to start!</div>
-                </div>
-            </div></div>        </div>
-                </div>
-                <div class="col-lg-6">
-                            <div id="pitch" class="pitch">
-                        <div class="ball" style="top: 90%; left: 56%;"></div>
-            <div class="player" style="top: 91%; left: 54%;"><img class="thumbnail" src="http://graph.facebook.com/517233293/picture"></div>
+                    <div class="panel-body">
+                        <form method="post" id="newPlayer">
+                            <input class="typeahead" type="text" autocomplete="off" name="friend_name">
+                            <input type="hidden" id="friend_id" name="friend_id">
+                            <input class="btn btn-primary" type="submit" value="Medizinische Checks">
+                        </form>
                     </div>
                 </div>
             </div>
-
-            <div class="modal fade" id="skillgameModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;"></div><!-- /.modal -->
-
+            <div class="col-lg-8">
+            <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">My Roster</h3>
+            </div>
+            <div class="panel-body">
+            <div id="roster" class="clearfix">
+            <div class="clearfix player" data-id="1"
+                 data-html="true" data-content='<div class="stats">
+            <h5>primary</h5>
+                    <div>
+                <i class="fa fa-skills"></i>
+                <label>Skills</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 87%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-charisma"></i>
+                <label>Charisma</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" style="width: 30%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-popularity"></i>
+                <label>Popularity</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" style="width: -6%;"></div>
+                </div>
+            </div>
+                    <h5>fitness</h5>
+                    <div>
+                <i class="fa fa-fitness"></i>
+                <label>Fitness</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" style="width: 62%;"></div>
+                </div>
+            </div>
+            </div>'
+                 data-title="Stephan Groth" data-placement="auto">
+                <div class="picture"><img class="thumbnail" src="http://graph.facebook.com/517233293/picture"></div>
+                <div class="description">
+                </div>
+            </div>
+            <div class="clearfix player" data-id="2"
+                 data-html="true" data-content='<div class="stats">
+            <h5>primary</h5>
+                    <div>
+                <i class="fa fa-skills"></i>
+                <label>Skills</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" style="width: 35%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-charisma"></i>
+                <label>Charisma</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" style="width: 51%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-popularity"></i>
+                <label>Popularity</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" style="width: 44%;"></div>
+                </div>
+            </div>
+                    <h5>fitness</h5>
+                    <div>
+                <i class="fa fa-fitness"></i>
+                <label>Fitness</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 97%;"></div>
+                </div>
+            </div>
+            </div>'
+                 data-title="Rahel Pfiffner" data-placement="auto">
+                <div class="picture"><img class="thumbnail" src="http://graph.facebook.com/646886405/picture"></div>
+                <div class="description">
+                </div>
+            </div>
+            <div class="clearfix player" data-id="6"
+                 data-html="true" data-content='<div class="stats">
+            <h5>primary</h5>
+                    <div>
+                <i class="fa fa-skills"></i>
+                <label>Skills</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" style="width: 15%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-charisma"></i>
+                <label>Charisma</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" style="width: 20%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-popularity"></i>
+                <label>Popularity</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 95%;"></div>
+                </div>
+            </div>
+                    <h5>fitness</h5>
+                    <div>
+                <i class="fa fa-fitness"></i>
+                <label>Fitness</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 91%;"></div>
+                </div>
+            </div>
+            </div>'
+                 data-title="Rimini W. Frosch" data-placement="auto">
+                <div class="picture"><img class="thumbnail" src="http://graph.facebook.com/527649474/picture"></div>
+                <div class="description">
+                </div>
+            </div>
+            <div class="clearfix player" data-id="7"
+                 data-html="true" data-content='<div class="stats">
+            <h5>primary</h5>
+                    <div>
+                <i class="fa fa-skills"></i>
+                <label>Skills</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 85%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-charisma"></i>
+                <label>Charisma</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" style="width: 13%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-popularity"></i>
+                <label>Popularity</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" style="width: 28%;"></div>
+                </div>
+            </div>
+                    <h5>fitness</h5>
+                    <div>
+                <i class="fa fa-fitness"></i>
+                <label>Fitness</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" style="width: 58%;"></div>
+                </div>
+            </div>
+            </div>'
+                 data-title="Robert Drakogiannakis" data-placement="auto">
+                <div class="picture"><img class="thumbnail" src="http://graph.facebook.com/728629017/picture"></div>
+                <div class="description">
+                </div>
+            </div>
+            <div class="clearfix player" data-id="8"
+                 data-html="true" data-content='<div class="stats">
+            <h5>primary</h5>
+                    <div>
+                <i class="fa fa-skills"></i>
+                <label>Skills</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" style="width: 49%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-charisma"></i>
+                <label>Charisma</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 71%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-popularity"></i>
+                <label>Popularity</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" style="width: 10%;"></div>
+                </div>
+            </div>
+                    <h5>fitness</h5>
+                    <div>
+                <i class="fa fa-fitness"></i>
+                <label>Fitness</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" style="width: 60%;"></div>
+                </div>
+            </div>
+            </div>'
+                 data-title="Dennis Busch" data-placement="auto">
+                <div class="picture"><img class="thumbnail" src="http://graph.facebook.com/524237871/picture"></div>
+                <div class="description">
+                </div>
+            </div>
+            <div class="clearfix player" data-id="9"
+                 data-html="true" data-content='<div class="stats">
+            <h5>primary</h5>
+                    <div>
+                <i class="fa fa-skills"></i>
+                <label>Skills</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" style="width: 40%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-charisma"></i>
+                <label>Charisma</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" style="width: 41%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-popularity"></i>
+                <label>Popularity</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" style="width: 37%;"></div>
+                </div>
+            </div>
+                    <h5>fitness</h5>
+                    <div>
+                <i class="fa fa-fitness"></i>
+                <label>Fitness</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" style="width: 46%;"></div>
+                </div>
+            </div>
+            </div>'
+                 data-title="Pino Quaresima" data-placement="auto">
+                <div class="picture"><img class="thumbnail" src="http://graph.facebook.com/596467949/picture"></div>
+                <div class="description">
+                </div>
+            </div>
+            <div class="clearfix player" data-id="10"
+                 data-html="true" data-content='<div class="stats">
+            <h5>primary</h5>
+                    <div>
+                <i class="fa fa-skills"></i>
+                <label>Skills</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 81%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-charisma"></i>
+                <label>Charisma</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" style="width: 12%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-popularity"></i>
+                <label>Popularity</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" style="width: 43%;"></div>
+                </div>
+            </div>
+                    <h5>fitness</h5>
+                    <div>
+                <i class="fa fa-fitness"></i>
+                <label>Fitness</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 92%;"></div>
+                </div>
+            </div>
+            </div>'
+                 data-title="Jeannette Hélène Paladino-Aerne" data-placement="auto">
+                <div class="picture"><img class="thumbnail" src="http://graph.facebook.com/828934527/picture"></div>
+                <div class="description">
+                </div>
+            </div>
+            <div class="clearfix player" data-id="21"
+                 data-html="true" data-content='<div class="stats">
+            <h5>primary</h5>
+                    <div>
+                <i class="fa fa-skills"></i>
+                <label>Skills</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 89%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-charisma"></i>
+                <label>Charisma</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" style="width: 21%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-popularity"></i>
+                <label>Popularity</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" style="width: 15%;"></div>
+                </div>
+            </div>
+                    <h5>fitness</h5>
+                    <div>
+                <i class="fa fa-fitness"></i>
+                <label>Fitness</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 86%;"></div>
+                </div>
+            </div>
+            </div>'
+                 data-title="Don Promillo" data-placement="auto">
+                <div class="picture"><img class="thumbnail" src="http://graph.facebook.com/549970588/picture"></div>
+                <div class="description">
+                </div>
+            </div>
+            <div class="clearfix player" data-id="22"
+                 data-html="true" data-content='<div class="stats">
+            <h5>primary</h5>
+                    <div>
+                <i class="fa fa-skills"></i>
+                <label>Skills</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" style="width: 49%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-charisma"></i>
+                <label>Charisma</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" style="width: 29%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-popularity"></i>
+                <label>Popularity</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" style="width: 52%;"></div>
+                </div>
+            </div>
+                    <h5>fitness</h5>
+                    <div>
+                <i class="fa fa-fitness"></i>
+                <label>Fitness</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 95%;"></div>
+                </div>
+            </div>
+            </div>'
+                 data-title="Petar Arapovic" data-placement="auto">
+                <div class="picture"><img class="thumbnail" src="http://graph.facebook.com/643953604/picture"></div>
+                <div class="description">
+                </div>
+            </div>
+            <div class="clearfix player" data-id="23"
+                 data-html="true" data-content='<div class="stats">
+            <h5>primary</h5>
+                    <div>
+                <i class="fa fa-skills"></i>
+                <label>Skills</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" style="width: 27%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-charisma"></i>
+                <label>Charisma</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" style="width: 13%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-popularity"></i>
+                <label>Popularity</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 84%;"></div>
+                </div>
+            </div>
+                    <h5>fitness</h5>
+                    <div>
+                <i class="fa fa-fitness"></i>
+                <label>Fitness</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 84%;"></div>
+                </div>
+            </div>
+            </div>'
+                 data-title="Noemi Scheps" data-placement="auto">
+                <div class="picture"><img class="thumbnail" src="http://graph.facebook.com/573679960/picture"></div>
+                <div class="description">
+                </div>
+            </div>
+            <div class="clearfix player" data-id="24"
+                 data-html="true" data-content='<div class="stats">
+            <h5>primary</h5>
+                    <div>
+                <i class="fa fa-skills"></i>
+                <label>Skills</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" style="width: 24%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-charisma"></i>
+                <label>Charisma</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" style="width: 21%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-popularity"></i>
+                <label>Popularity</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 85%;"></div>
+                </div>
+            </div>
+                    <h5>fitness</h5>
+                    <div>
+                <i class="fa fa-fitness"></i>
+                <label>Fitness</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 95%;"></div>
+                </div>
+            </div>
+            </div>'
+                 data-title="Res Hefti" data-placement="auto">
+                <div class="picture"><img class="thumbnail" src="http://graph.facebook.com/1013454549/picture"></div>
+                <div class="description">
+                </div>
+            </div>
+            <div class="clearfix player" data-id="25"
+                 data-html="true" data-content='<div class="stats">
+            <h5>primary</h5>
+                    <div>
+                <i class="fa fa-skills"></i>
+                <label>Skills</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 82%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-charisma"></i>
+                <label>Charisma</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" style="width: 38%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-popularity"></i>
+                <label>Popularity</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" style="width: 10%;"></div>
+                </div>
+            </div>
+                    <h5>fitness</h5>
+                    <div>
+                <i class="fa fa-fitness"></i>
+                <label>Fitness</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 96%;"></div>
+                </div>
+            </div>
+            </div>'
+                 data-title="Michael Rousseau" data-placement="auto">
+                <div class="picture"><img class="thumbnail" src="http://graph.facebook.com/528947017/picture"></div>
+                <div class="description">
+                </div>
+            </div>
+            <div class="clearfix player" data-id="26"
+                 data-html="true" data-content='<div class="stats">
+            <h5>primary</h5>
+                    <div>
+                <i class="fa fa-skills"></i>
+                <label>Skills</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" style="width: 43%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-charisma"></i>
+                <label>Charisma</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 77%;"></div>
+                </div>
+            </div>
+                    <div>
+                <i class="fa fa-popularity"></i>
+                <label>Popularity</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" style="width: 10%;"></div>
+                </div>
+            </div>
+                    <h5>fitness</h5>
+                    <div>
+                <i class="fa fa-fitness"></i>
+                <label>Fitness</label>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 100%;"></div>
+                </div>
+            </div>
+            </div>'
+                 data-title="Remo Gee" data-placement="auto">
+                <div class="picture"><img class="thumbnail" src="http://graph.facebook.com/511141518/picture"></div>
+                <div class="description">
+                </div>
+            </div>
+            </div>
             <script>
-            $(document).ready(function () {
-                $('.skillContainer').hide();
-                initControls();
-            });
+                $(document).ready(function(){
+                    $('#roster .player').mouseenter(function(e){
+                        e.stopPropagation();
+                        $(this).popover('show');
+                    });
+                    $('#roster .player').mouseleave(function(e){
+                        e.stopPropagation();
+                        $(this).popover('hide');
+                    });
 
-            function initControls(){
-                $('#matchControls .actionButton').click(function(){
-                    var button = $(this);
-                    var instruction = button.data('instruction');
-                    var skill = button.data('skill');
-                    //button.button('loading');
-                    $('#matchControls .actionButton').hide();
+                    $('.btn.heal').click(function(){
+                        $('#eventModal').modal({remote:'/game/player/heal/player_id/'+$(this).parent().data('id')});
+                    });
+                });
 
-                    if (instruction=='shoot'){
-                        // Hook Shooting Skillgame
-                        initSkillModifier(instruction, skill, function(instruction,skill){
-                            $('#skillgameModal').modal({
-                                remote: "/game/match/skillgame/away_team_id/3/skill/"+skill
-                            });
+                function confirmPlayerDelete(id){
+                    if(confirm('Spieler wirklich aus dem Kader werfen?')){
+                        $.ajax({
+                            url: '/game/player/delete/id/'+id,
+                            success: function(data) {
+                                $("#roster").find("[data-slide='" + id + "']").remove();
+                            }
                         });
                     }
-                    else if (button.hasClass('skillModified')) {
-                        initSkillModifier(instruction, skill, loadGameAction);
-                    } else {
-                        loadGameAction(instruction);
-                    }
-
-                });
-            }
-
-            function animateGauge(container,skill){
-                var width = parseInt(container.css('width'));
-                var parentWidth = parseInt(container.parent().css('width'));
-                if(skill=='power'){
-                    if (width < 10) {
-                        container.css('width', '100%');
-                    } else {
-                        container.css('width', '0%');
-                    }
-                }else if(skill=='accuracy'){
-                    if (width < 10) {
-                        container.css('width', '100%');
-                    } else {
-                        container.css('width', '0%');
-                    }
+                    return false;
                 }
-            }
-            function initSkillModifier(instruction, skill, callback) {
+            </script>            </div>
+            </div>
+            </div>
+            </div>
 
-                var progress = document.createElement('div');
-                $(progress).addClass('progress '+skill);
-
-                var progressBar = document.createElement('div');
-                $(progressBar).addClass('progress-bar gauge');
-                $(progressBar).css('width','50%');
-
-                var hitButton = document.createElement('a');
-                $(hitButton).addClass('btn hit btn-primary pull-left');
-                $(hitButton).html('Hit it!');
-
-                $(progressBar).appendTo($(progress));
-                $(hitButton).appendTo($('#skillContainer'));
-                $(progress).appendTo($('#skillContainer'));
-
-                animateGauge($(progressBar),skill);
-                var gaugeInterval = setInterval(function () {
-                    animateGauge($(progressBar),skill);
-                }, parseFloat($(progressBar).css('transition-duration')) * 1100);
-
-                $(hitButton).click(function(){
-                    clearInterval(gaugeInterval);
-                    $(progressBar).css('width',$(progressBar).css('width'));
-                    callback(instruction, skill);
-                })
-            };
-
-            function loadEvent(data,i) {
-                if (data.html[++i]) {
-                    $('#matchLog .log').prepend(data.html[i]);
-                    $('#matchLog .log .row:first').slideDown(300, function () {
-
-                        $('.pitch .ball').animate({
-                            'left': data.log[i].ball.x + '%',
-                            'top': data.log[i].ball.y + '%'
-                        }, 500, "linear");
-
-                        if (data.log[i].player_pic) {
-                            $('#pitch .player').html('');
-                            if (data.log[i].side == 1) {
-                                $('#pitch .player').css('left', (data.log[i].ball.x - 2) + '%');
-                                $('#pitch .player').css('top', data.log[i].ball.y + 1 + '%');
-                            } else if (data.log[i].side == 2) {
-                                $('#pitch .player').css('left', (data.log[i].ball.x + 2) + '%');
-                                $('#pitch .player').css('top', data.log[i].ball.y + 1 + '%');
-                            }
-                            var img = $('<img />'); //Equivalent: $(document.createElement('img'))
-                            img.attr('class', 'thumbnail');
-                            img.attr('src', data.log[i].player_pic);
-                            $('#pitch .player').html(img);
-                        }
-
-                        setTimeout(function(){
-                            loadEvent(data,i);
-                        }, 500);
-                    });
-                } else {
-                    $('#matchControls').html(data.controls);
-                    initControls();
-                }
-            }
-
-            function loadGameAction(instruction, skill, callback) {
-
-                var skillModifier = 0;
-                if(typeof skill !== 'undefined'){
-                    var pct = (parseInt($('#skillContainer').find('.gauge').css('width')) / parseInt($('#skillContainer').find('.gauge').parent().css('width')))*100;
-                    if(skill=='power'){
-                        skillModifier = pct;
-                    }else{
-                        skillModifier = (50-Math.abs(50-pct))*2;
-                        console.log(skillModifier);
-                    }
-                    $('#skillContainer').html('');
-                }
-
-                $.ajax({
-                    url: "/game/match/play/away_team_id/3",
-                    data: {
-                        'instruction': instruction,
-                        'skill': skillModifier
-                    }
-                }).done(function (jsonData) {
-                    data = $.parseJSON(jsonData);
-
-                    if(typeof callback !== 'undefined'){
-                        for(var j=0;j<data.log.length;j++){
-                            if(data.log[j].action!=null){
-                                callback(data.log[j].action);
-                            }
-                        }
-                        setTimeout(function () {
-                            $('#skillgameModal').modal('hide');
-                            $('#skillgameModal').removeData('bs.modal')
-                            loadEvent(data,-1);
-                        }, 1500);
-                    }else{
-                        loadEvent(data,-1);
-                    }
-
-                    $('#summary').html(data.summary);
-                });
-            }
-            </script>
             <!-- /build -->
         </div>
     </div>

@@ -20,7 +20,7 @@ class RF_Form_Decorator_Errors extends Zend_Form_Decorator_Errors
         $wrapper = $element->getDecorator("outerwrapper");
         if($wrapper)
         {
-            $wrapper->setOption("class", trim("error " . $wrapper->getOption("class")));
+            $wrapper->setOption("class", trim("has-error " . $wrapper->getOption("class")));
         }
 
         $separator = $this->getSeparator();

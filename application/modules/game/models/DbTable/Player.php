@@ -72,7 +72,7 @@ class Game_Model_DbTable_Player extends RF_Model_Regular
     }
 
     public function refreshImage($p){
-        $pic = json_decode(file_get_contents('https://graph.facebook.com/'.$p['fb_uid'].'/picture?redirect=false'),true);
+        $pic = json_decode(file_get_contents('https://graph.facebook.com/'.$p['fb_uid'].'/picture?type=normal&redirect=false'),true);
         $f['profile_pic'] = $pic['data']['url'];
         $this->updateEntry($f,$p['id']);
     }

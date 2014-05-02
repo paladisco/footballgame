@@ -34,7 +34,7 @@ class Game_PlayerController extends Local_Controller_Action
         $friends = $this->_facebook_api->api('/'.$this->_facebook_user_id.'/friends');
         $return = array();
         foreach($friends['data'] as $f){
-            $return[] = array('value'=>$f['name'],'id'=>$f['id'],'tokens'=>explode(" ",$f['name']));
+            $return[] = array('name'=>$f['name'],'id'=>$f['id']);
         }
         echo json_encode($return);
     }

@@ -12,10 +12,16 @@
             <module>game</module>
             <controller>team</controller>
             <pages>
-                <setup>
-                    <label><![CDATA[<i class="fa fa-facebook-sign"></i> Add Players]]></label>
+                <players>
+                    <label><![CDATA[<i class="fa fa-facebook-sign"></i> Meine Spieler]]></label>
                     <module>game</module>
                     <controller>team</controller>
+                    <action>index</action>
+                </players>
+                <setup>
+                    <label><![CDATA[<i class="fa fa-facebook-sign"></i> Mein Verein]]></label>
+                    <module>game</module>
+                    <controller>setup</controller>
                     <action>index</action>
                 </setup>
             </pages>

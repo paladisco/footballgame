@@ -38,6 +38,7 @@ class Game_MatchController extends Local_Controller_Action
             $this->view->title = "Match Time";
             $this->view->headline = $match->getLineup();
             $this->view->log = $match->getEventLog();
+            $this->view->match = $match;
 
             $this->view->summary = $match->getSummary();
             $this->view->pitch = $match->getPitch();

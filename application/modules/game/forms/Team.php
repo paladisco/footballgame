@@ -18,6 +18,19 @@ class Game_Form_Team extends RF_Form_BootstrapForm
             ->setRequired(false)
             ->addFilter('StringTrim');
 
+        $elements[] = new Zend_Form_Element_Text('color_primary');
+        end($elements)->setLabel('Hauptfarbe')
+            ->setRequired(true)
+            ->setAttrib('class','colorPicker')
+            ->addFilter('StringTrim');
+
+        $elements[] = new Zend_Form_Element_Text('color_secondary');
+        end($elements)->setLabel('Zweitfarbe')
+            ->setRequired(true)
+            ->setAttrib('class','colorPicker')
+            ->addFilter('StringTrim');
+
+
         $elements[] = new Zend_Form_Element_Submit('submit');
         end($elements)->setLabel('erstellen');
 

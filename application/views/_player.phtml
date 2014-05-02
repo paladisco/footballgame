@@ -1,6 +1,6 @@
 <div class="player position" data-id="<?php echo $this->player['id']; ?>" data-position="<?php echo $this->position; ?>">
     <div class="picture">
-        <?php if($this->player){ ?><img class="thumbnail" src="http://graph.facebook.com/<?php echo $this->player['fb_uid']; ?>/picture"><?php } ?>
+        <?php if($this->player){ ?><img class="thumbnail" src="http://graph.facebook.com/<?php echo $this->player['fb_uid']; ?>/picture?type=normal"><?php } ?>
     </div>
     <div class="name"><?php echo $this->player['name']; ?></div>
     <?php echo $this->partial('_stats.phtml',array('stats'=>$this->player['stats'])); ?>

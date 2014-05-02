@@ -17,10 +17,10 @@
         </div>
         <div class="row">
             <div class="col-lg-6">
-                <h4 style="text-align: right;"><span class="label label-success"><?php echo $this->homeTeam->getName(); ?></span></h4>
+                <h4 style="text-align: right;"><span class="label" style="background-color: <?php echo $this->match->getHomeTeamColor(); ?>"><?php echo $this->homeTeam->getName(); ?></span></h4>
             </div>
             <div class="col-lg-6">
-                <h4><span class="label label-danger"><?php echo $this->awayTeam->getName(); ?></span></h4>
+                <h4><span class="label" style="background-color: <?php echo $this->match->getAwayTeamColor(); ?>"><?php echo $this->awayTeam->getName(); ?></span></h4>
             </div>
             <div id="summary" class="summary">
                 <?php echo $this->partial('match/_summary.phtml',array('summary'=>$this->summary)); ?>
@@ -37,6 +37,15 @@
         </div>
     </div>
 </div>
+
+<style type="text/css">
+    .player.home img{
+        border-color: <?php echo $this->match->getHomeTeamColor(); ?>;
+    }
+    .player.away img{
+        border-color: <?php echo $this->match->getAwayTeamColor(); ?>;
+    }
+</style>
 
 <div class="modal fade" id="skillgameModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
@@ -132,9 +141,13 @@ function loadEvent(data,i) {
             if (data.log[i].player_pic) {
                 $('#pitch .player').html('');
                 if (data.log[i].side == 1) {
+                    $('#pitch .player').addClass('home');
+                    $('#pitch .player').removeClass('away');
                     $('#pitch .player').css('left', (data.log[i].ball.x - 2) + '%');
                     $('#pitch .player').css('top', data.log[i].ball.y + 1 + '%');
                 } else if (data.log[i].side == 2) {
+                    $('#pitch .player').addClass('away');
+                    $('#pitch .player').removeClass('home');
                     $('#pitch .player').css('left', (data.log[i].ball.x + 2) + '%');
                     $('#pitch .player').css('top', data.log[i].ball.y + 1 + '%');
                 }

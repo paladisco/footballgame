@@ -128,6 +128,20 @@ class Game_Model_Match
         return $this->getTeam(self::HOME_TEAM);
     }
 
+    public function getHomeTeamColor(){
+        $color = $this->getHomeTeam()->getPrimaryColor();
+        return $color;
+    }
+
+    public function getAwayTeamColor(){
+        $color = $this->getAwayTeam()->getPrimaryColor();
+        if($color!=$this->getHomeTeamColor()){
+            return $color;
+        }else{
+            return $this->getAwayTeam()->getSecondaryColor();
+        }
+    }
+
     /**
      * @return Game_Model_Team
      */

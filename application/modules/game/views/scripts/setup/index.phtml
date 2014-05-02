@@ -1,3 +1,14 @@
 <h2>Setup your Team</h2>
 <?php
     echo $this->form;
+?>
+<script>
+    $(".colorPicker").spectrum({
+        preferredFormat: "hex",
+        showPaletteOnly: true,
+        showPalette:true,
+        palette: [
+            ['black', 'white', 'red', 'yellow', 'green', 'blue', 'violet']
+        ]
+    });
+</script>

@@ -1,4 +1,5 @@
 <?php
+
 class RF_Form_BootstrapForm extends Zend_Form
 {
     public function __construct($options = null)
@@ -25,9 +26,21 @@ class RF_Form_BootstrapForm extends Zend_Form
             "ViewHelper",
             array("Errors", array("placement" => "append")),
             array("Description", array("tag" => "span", "class" => "help-block")),
-            array(array("innerwrapper" => "HtmlTag"), array("tag" => "div", "class" => "controls")),
-            array("Label", array("class" => "control-label")),
-            array(array("outerwrapper" => "HtmlTag"), array("tag" => "div", "class" => "control-group"))
+            array(array("innerwrapper" => "HtmlTag"), array("tag" => "div", "class" => "col-lg-8")),
+            array("Label", array("class" => "control-label col-lg-4")),
+            array(array("outerwrapper" => "HtmlTag"), array("tag" => "div", "class" => "form-group"))
+        );
+    }
+
+    protected function _getElementDecoratorsOffset()
+    {
+        return array(
+            "ViewHelper",
+            array("Errors", array("placement" => "append")),
+            array("Description", array("tag" => "span", "class" => "help-block")),
+            array(array("innerwrapper" => "HtmlTag"), array("tag" => "div", "class" => "col-lg-8 col-lg-offset-4")),
+            array("Label", array("class" => "control-label col-lg-4")),
+            array(array("outerwrapper" => "HtmlTag"), array("tag" => "div", "class" => "form-group"))
         );
     }
 
@@ -51,7 +64,12 @@ class RF_Form_BootstrapForm extends Zend_Form
         else
         {
             $element->clearDecorators();
-            $element->setDecorators($this->_getElementDecorators());
+            if(!strlen($element->getLabel()) || $element instanceof Zend_Form_Element_Checkbox)
+            {
+                $element->setDecorators($this->_getElementDecoratorsOffset());
+            }else{
+                $element->setDecorators($this->_getElementDecorators());
+            }
         }
 
         if($element instanceof Zend_Form_Element_File)
@@ -82,9 +100,6 @@ class RF_Form_BootstrapForm extends Zend_Form
 
             $this->_addActionsDisplayGroupElement($element);
 
-            //$element->addDecorator(array(
-            //"outerwrapper" => "HtmlTag"), array("tag" => "div", "class" => "actions")
-            //);
         }
 
         if($element instanceof Zend_Form_Element_Checkbox)
@@ -96,8 +111,8 @@ class RF_Form_BootstrapForm extends Zend_Form
                 array(array("labelclosing" => "HtmlTag"), array("tag" => "label", "closeOnly" => true)),
                 array("Errors", array("placement" => "append")),
                 array("Description", array("tag" => "span", "class" => "help-block")),
-                array(array("innerwrapper" => "HtmlTag"), array("tag" => "div", "class" => "controls")),
-                array(array("outerwrapper" => "HtmlTag"), array("tag" => "div", "class" => "control-group"))
+                array(array("innerwrapper" => "HtmlTag"), array("tag" => "div", "class" => "col-lg-8 col-lg-offset-4")),
+                array(array("outerwrapper" => "HtmlTag"), array("tag" => "div", "class" => "form-group"))
             ));
         }
 
@@ -134,9 +149,9 @@ class RF_Form_BootstrapForm extends Zend_Form
                 "ViewHelper",
                 array("Errors", array("placement" => "append")),
                 array("Description", array("tag" => "span", "class" => "help-block")),
-                array(array("innerwrapper" => "HtmlTag"), array("tag" => "div", "class" => "controls")),
-                array("Label", array("class" => "control-label")),
-                array(array("outerwrapper" => "HtmlTag"), array("tag" => "div", "class" => "control-group"))
+                array(array("innerwrapper" => "HtmlTag"), array("tag" => "div", "class" => "col-lg-8")),
+                array("Label", array("class" => "control-label col-lg-4")),
+                array(array("outerwrapper" => "HtmlTag"), array("tag" => "div", "class" => "form-group"))
             ));
         }
 
@@ -148,6 +163,14 @@ class RF_Form_BootstrapForm extends Zend_Form
         if($element instanceof Zend_Form_Element_Textarea && !$element->getAttrib('rows'))
         {
             $element->setAttrib('rows', '3');
+        }
+
+        if($element instanceof Zend_Form_Element_Text
+            || $element instanceof Zend_Form_Element_Textarea
+            || $element instanceof Zend_Form_Element_Password
+            || $element instanceof Zend_Form_Element_Select)
+        {
+            $element->setAttrib('class', $element->getAttrib('class').' form-control');
         }
 
         if($element instanceof Zend_Form_Element_Captcha)
@@ -170,7 +193,8 @@ class RF_Form_BootstrapForm extends Zend_Form
                 array(
                     "decorators" => array(
                         "FormElements",
-                        array("HtmlTag", array("tag" => "div", "class" => "form-actions"))
+                        array(array("innerwrapper" => "HtmlTag"), array("tag" => "div", "class" => "col-lg-offset-4 col-lg-8")),
+                        array(array("outerwrapper" => "HtmlTag"), array("tag" => "div", "class" => "form-group actions"))
                     )
                 ));
         }
